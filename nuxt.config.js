@@ -1,4 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
+import English from './lang/en-CA.js'
+import French from './lang/fr-CA.js'
+import Japanese from './lang/jp-JP.js'
 
 export default {
   mode: 'spa',
@@ -42,7 +45,24 @@ export default {
   */
   modules: [
     '@nuxtjs/pwa',
+    'nuxt-i18n', 
   ],
+  i18n: {
+    locales: ['en', 'fr', 'jp'],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      alwaysRedirect: false,
+      fallbackLocale: 'en',
+    },
+    vueI18n: {
+      messages: {
+        en: English,
+        fr: French,
+        jp: Japanese,
+      }
+    }
+  },
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
@@ -72,6 +92,9 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      // these are custom paths, where @@ is the root directory, as defined by Nuxt under the hood
+      config.resolve.alias['@c'] = '@@/components';
+      config.resolve.alias['@l'] = '@@/layouts';
     }
   }
 }

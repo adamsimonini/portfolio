@@ -9,17 +9,39 @@
       sm8
       md6
     >
-    <h1>derka</h1>
+    <h1>{{ $t('welcome')}}</h1>
+    <LangToggle />
+    <h2>Current language: {{this.$store.state.langCookie.language}}</h2>
+    <h3 v-on:click="test()">test state</h3>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import LangToggle from '@c/langToggle.vue'
+import { mapState } from 'vuex'
 
 export default {
+  layout () {
+    return myNewLayout;
+  },
+  data: function () {
+    return {
+      myNewLayout: 'layoutTest'
+    }
+  },
   components: {
+    LangToggle,
+  },
+  computed: {
+    ...mapState({
+      newLayout: state => state.layout
+    }),
+  },
+  methods: {
+    test: function () {
+      layout;
+    }
   }
 }
 </script>
