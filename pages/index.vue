@@ -22,13 +22,14 @@ import LangToggle from '@c/langToggle.vue'
 import { mapState } from 'vuex'
 
 export default {
-  layout () {
-    return myNewLayout;
-  },
+  name: 'Index',
   data: function () {
     return {
       myNewLayout: 'layoutTest'
     }
+  },
+  layout () {
+    return false ? 'layoutTest' : 'default';
   },
   components: {
     LangToggle,
@@ -40,7 +41,7 @@ export default {
   },
   methods: {
     test: function () {
-      layout;
+      console.log(this.newLayout);
     }
   }
 }
