@@ -13,6 +13,7 @@
     <LangToggle />
     <h2>Current language: {{this.$store.state.langCookie.language}}</h2>
     <ThemeToggle />
+    <v-btn @click="flipLayout()">Flip layout</v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -30,7 +31,7 @@ export default {
     }
   },
   layout () {
-    return 'flippedLayout';
+    return 'default';
   },
   components: {
     LangToggle,

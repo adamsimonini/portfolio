@@ -24,6 +24,12 @@
             <v-list-item-title v-text="item.title" />
           </v-list-item-content>
         </v-list-item>
+        <v-list-item>
+          <ThemeToggle />
+        </v-list-item>
+        <v-list-item>
+          <LangToggle />
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
@@ -68,7 +74,14 @@
 </template>
 
 <script>
+import LangToggle from '@c/langToggle.vue';
+import ThemeToggle from '@c/themeToggle.vue';
+
 export default {
+  components: {
+    LangToggle,
+    ThemeToggle,
+  },
   data () {
     return {
       clipped: false,
@@ -78,13 +91,13 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Welcome',
-          to: '/'
+          to: '/en'
         },
         {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
           to: '/inspire'
-        }
+        },
       ],
       miniVariant: false,
       right: true,

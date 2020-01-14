@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-btn v-on:click="themeToggle()">Flip to {{this.$vuetify.theme.dark ? 'Light' : 'Dark'}} mode</v-btn>
+        <v-btn v-on:click="themeToggle()">{{this.$vuetify.theme.dark ? 'Light' : 'Dark'}} mode</v-btn>
     </div>
 </template>
 
