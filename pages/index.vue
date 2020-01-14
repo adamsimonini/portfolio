@@ -12,7 +12,7 @@
     <h1>{{ $t('welcome')}}</h1>
     <LangToggle />
     <h2>Current language: {{this.$store.state.langCookie.language}}</h2>
-    <h3 v-on:click="flipLayout()">Flip Layout Vertically</h3>
+    <v-btn v-on:click="flipLayout()">Flip Layout Vertically</v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -25,7 +25,7 @@ export default {
   name: 'Index',
   data: function () {
     return {
-      layout: 1
+      layout: true,
     }
   },
   layout () {
@@ -38,15 +38,11 @@ export default {
   },
   methods: {
     flipLayout: function () {
-      if(this.layout == 1){
-        $nuxt.setLayout('flippedLayout');
-        this.layout=0;
-      } else if (this.layout == 0) {
-        $nuxt.setLayout('test');
-        this.layout=1;
-      }
-      // this.layout == 'default' ? (this.layout="flippedLayout", $nuxt.setLayout('flippedLayout')) : (this.layout="default", $nuxt.setLayout('default'));
-      console.log(this.layout);
+      // this functional changes which layout the component is using, as seen in the :root/layout folder
+      let currentLayout = this.$nuxt.$data.layoutName;
+      // either way works, though the 2nd one is harder to understand
+      currentLayout == 'default' ? $nuxt.setLayout('flippedLayout') : $nuxt.setLayout('defaut');
+      // $nuxt.setLayout(currentLayout = currentLayout == 'default' ? 'flippedLayout' : 'default')
     }
   }
 }
