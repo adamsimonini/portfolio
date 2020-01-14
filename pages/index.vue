@@ -12,13 +12,14 @@
     <h1>{{ $t('welcome')}}</h1>
     <LangToggle />
     <h2>Current language: {{this.$store.state.langCookie.language}}</h2>
-    <v-btn v-on:click="flipLayout()">Flip Layout Vertically</v-btn>
+    <ThemeToggle />
     </v-flex>
   </v-layout>
 </template>
 
 <script>
 import LangToggle from '@c/langToggle.vue'
+import ThemeToggle from '@c/themeToggle.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -33,6 +34,7 @@ export default {
   },
   components: {
     LangToggle,
+    ThemeToggle,
   },
   computed: {
   },
