@@ -1,5 +1,5 @@
 export const state = () => ({
-    layout: 'layoutTest',
+    layout: 'flippedLayout',
 });
 
 export const getters = {}

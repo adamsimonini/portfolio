@@ -27,12 +27,10 @@ export default {
   name: 'Index',
   data: function () {
     return {
-      layout: true,
+      layout: this.$store.state.layout,
     }
   },
-  layout () {
-    return 'default';
-  },
+  layout: 'flippedLayout',
   components: {
     LangToggle,
     ThemeToggle,
@@ -41,6 +39,9 @@ export default {
   },
   methods: {
     flipLayout: function () {
+      // console.log(getCookie("i18n_redirected"));
+      console.log(this.$getCookie("i18n_redirected"));
+
       // this functional changes which layout the component is using, as seen in the :root/layout folder
       let currentLayout = this.$nuxt.$data.layoutName;
       // either way works, though the 2nd one is harder to understand
