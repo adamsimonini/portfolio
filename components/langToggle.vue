@@ -1,10 +1,10 @@
 <template>
     <v-list-item>
       <v-list-item-action>
-        <v-icon>mdi-apps</v-icon>
+        <v-icon>mdi-translate</v-icon>
       </v-list-item-action>
       <v-list-item-content>
-        <v-list-item-title v-text="items[1]" />
+        abcd
       </v-list-item-content>
     </v-list-item>
 </template>
