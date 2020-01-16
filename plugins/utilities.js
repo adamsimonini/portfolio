@@ -1,3 +1,8 @@
+/* 
+this is the plugin that allows for global functions (i.e., functions implicitly accessible to all complnents without the need for explicit implart statements)
+Components can access these functions via "this.functionName"
+*/
+
 import Vue from 'vue';
 
 Vue.prototype.$getCookie = cname => {
@@ -14,4 +19,8 @@ Vue.prototype.$getCookie = cname => {
       }
     }
     return "";
+}
+
+Vue.prototype.$alertMe = () => {
+    alert('test');
 }

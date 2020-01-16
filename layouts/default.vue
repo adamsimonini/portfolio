@@ -24,12 +24,8 @@
             <v-list-item-title v-text="item.title" />
           </v-list-item-content>
         </v-list-item>
-        <v-list-item>
           <ThemeToggle />
-        </v-list-item>
-        <v-list-item>
           <LangToggle />
-        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar

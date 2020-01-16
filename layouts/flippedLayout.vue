@@ -1,4 +1,4 @@
-<!-- When the 'layout' key is not specified in a page's export default, then this layout will automatically be used-->
+<!-- Applicable when compoent's layout value = the name of this file -->
 
 <template>
   <v-app dark>

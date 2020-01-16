@@ -30,7 +30,7 @@ export default {
       layout: this.$store.state.layout,
     }
   },
-  layout: 'flippedLayout',
+  layout: 'default',
   components: {
     LangToggle,
     ThemeToggle,

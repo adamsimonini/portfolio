@@ -34,6 +34,7 @@ export default {
   */
   plugins: [
     {src: '~/plugins/utilities.js'},
+    {src: '~/plugins/pathing.js'},
   ],
   /*
   ** Nuxt.js dev-modules
@@ -49,7 +50,21 @@ export default {
     'nuxt-i18n', 
   ],
   i18n: {
-    locales: ['en', 'fr', 'jp'],
+    locales: [
+      {
+        code: "en",
+        name: "English",
+      },
+      {
+        code: 'fr',
+        name: "français"
+      
+      },
+      {
+        code: 'jp',
+        name: "日本語"
+      }
+    ],
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
@@ -72,7 +87,7 @@ export default {
     customVariables: ['~/assets/variables.scss'],
     theme: {
       // abc: true,
-      dark: false,
+      dark: true,
       themes: {
         // dark: {
         //   primary: colors.blue.darken2,

@@ -1,13 +1,12 @@
 <template>
-    <div>
-        <v-select
-          :items="items"
-          label="language"
-        ></v-select>
-        <nuxt-link :to="switchLocalePath('en')">English</nuxt-link>
-        <nuxt-link :to="switchLocalePath('fr')">Français</nuxt-link>
-        <nuxt-link :to="switchLocalePath('jp')">日本語</nuxt-link>
-    </div>
+    <v-list-item>
+      <v-list-item-action>
+        <v-icon>mdi-apps</v-icon>
+      </v-list-item-action>
+      <v-list-item-content>
+        <v-list-item-title v-text="items[1]" />
+      </v-list-item-content>
+    </v-list-item>
 </template>
 
 <script>
@@ -18,11 +17,17 @@ export default {
       items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
     }),
     methods: {
-        matchCookieWithStore: function() {
-            // this.$store.langCookie.mutations('matchCookie');
+        names: function() {
+            alert(this.$i18n.locales);
+        },
+        getCurrentRoute: function() {
+            return this.$router.currentRoute
         }
     },
-    components: {
+    computed: {
+        localNames () {
+            return this.$i18n.locales.filter(i => i.name)
+        }
     },
 }
 </script>
