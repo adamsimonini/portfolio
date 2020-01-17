@@ -24,8 +24,9 @@
             <v-list-item-title v-text="item.title" />
           </v-list-item-content>
         </v-list-item>
-          <ThemeToggle />
-          <LangToggle />
+        <ThemeToggle />
+        <LayoutToggle />
+        <LangToggle />
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
@@ -72,16 +73,18 @@
 <script>
 import LangToggle from '@c/langToggle.vue';
 import ThemeToggle from '@c/themeToggle.vue';
+import LayoutToggle from '@c/layoutToggle.vue'
 
 export default {
   components: {
     LangToggle,
     ThemeToggle,
+    LayoutToggle,
   },
   data () {
     return {
       clipped: false,
-      drawer: false,
+      drawer: true,
       fixed: false,
       items: [
         {

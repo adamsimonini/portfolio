@@ -1,33 +1,27 @@
 <template>
-    <v-list-item>
-      <v-list-item-action>
-        <v-icon>mdi-translate</v-icon>
-      </v-list-item-action>
-      <v-list-item-content>
-        abcd
-      </v-list-item-content>
-    </v-list-item>
+    <div>
+        <v-select
+          :items="items"
+          label="language"
+        ></v-select>
+        <nuxt-link :to="switchLocalePath('en')">English</nuxt-link>
+        <nuxt-link :to="switchLocalePath('fr')">Français</nuxt-link>
+        <nuxt-link :to="switchLocalePath('jp')">日本語</nuxt-link>
+    </div>
 </template>
 
 <script>
-
 export default {
     name: 'langToggle',
     data: () => ({
       items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
     }),
     methods: {
-        names: function() {
-            alert(this.$i18n.locales);
-        },
-        getCurrentRoute: function() {
-            return this.$router.currentRoute
+        matchCookieWithStore: function() {
+            // this.$store.langCookie.mutations('matchCookie');
         }
     },
-    computed: {
-        localNames () {
-            return this.$i18n.locales.filter(i => i.name)
-        }
+    components: {
     },
 }
 </script>

@@ -1,7 +1,7 @@
 // totality of Japanese translations
 
 export default {
-    welcome: "ようこそ",
+    welcome: "このアプリケーションへようこそ！",
     // pages: {
     //   home: 'Pagina iniziale',
     //   contacts: 'Contatti'

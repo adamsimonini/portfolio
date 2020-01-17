@@ -1,7 +1,7 @@
 // totality of French translations
 
 export default {
-    welcome: "bonjour!",
+    welcome: "Bienvenue dans cette application!",
     // pages: {
     //   home: 'Pagina iniziale',
     //   contacts: 'Contatti'

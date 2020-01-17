@@ -11,8 +11,7 @@
     >
     <h1>{{ $t('welcome')}}</h1>
     <LangToggle />
-    <h2>Current language: {{this.$store.state.langCookie.language}}</h2>
-    <v-btn @click="flipLayout()">Flip layout</v-btn>
+    <!-- <v-btn @click="flipLayout()">Flip layout</v-btn> -->
     </v-flex>
   </v-layout>
 </template>
