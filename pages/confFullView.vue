@@ -1,5 +1,6 @@
 <template>
-    <div class="conf-card">
+  <v-layout class="conf-card">
+    <v-flex class="text-center">
         <div class="conf-title">
             <h3>{{title}}</h3>
         </div>
@@ -27,14 +28,22 @@
         <div class="deadline">
             Deadline to express interest: {{deadline}}
         </div>
-    </div>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-export default {
-    name: 'confCard',
-    data: () => ({
-    }),
+import LangToggle from '@c/langToggle.vue'
+import ThemeToggle from '@c/themeToggle.vue'
+import { mapState } from 'vuex'
+
+  export default {
+    name: 'confFullView',
+    data: function () {
+      return {
+        layout: this.$store.state.layout,
+      }
+    },
     props: {
         // TODO: can I set default value to trigger when field is left blank? At the moment it never triggers
         title: {
@@ -69,16 +78,19 @@ export default {
             default: "not provided"
         },
     },
-    methods: {
-    },
+    layout: 'default',
     components: {
     },
-}
+    computed: {
+      },
+    methods: {
+    }
+  }
 </script>
 
 <style scoped>
 .conf-card {
-    max-width: 300px;
+    margin: 0 10%;
     margin: 20px 20px;
 }
 .conf-title {
@@ -109,14 +121,9 @@ export default {
 }
 .conf-image {
     text-align: center;
-    transition: all .2s ease-in-out;
-}
-.conf-image:hover {
-    transform: scale(0.9); 
 }
 .conf-image img {
-    max-width: 300px;
-    max-height: 200px;
+    max-width: 350px;
 }
 a {
     text-decoration: none;
