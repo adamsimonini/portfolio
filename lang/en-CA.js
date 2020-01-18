@@ -1,7 +1,7 @@
 // totality of English translations
 
 export default {
-    welcome: "Welcome to this application!",
+  allConferencesTitle: "All upcoming conferences",
     // pages: {
     //   home: 'Home',
     //   contacts: 'Contacts'

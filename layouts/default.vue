@@ -81,8 +81,9 @@ export default {
     ThemeToggle,
     LayoutToggle,
   },
-  data () {
+  data() {
     return {
+      locale: '',
       clipped: false,
       drawer: true,
       fixed: false,
@@ -90,12 +91,12 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Welcome',
-          to: '/en'
+          to: "/en"
         },
         {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
-          to: '/inspire'
+          to: '/en/inspire'
         },
       ],
       miniVariant: false,
@@ -103,6 +104,10 @@ export default {
       rightDrawer: false,
       title: 'Default Layout'
     }
-  }
+  },
+  created() {
+    this.locale = this.$i18n.locale;
+    console.log(this.$i18n.locale)
+  },
 }
 </script>
