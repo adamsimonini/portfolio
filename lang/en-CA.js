@@ -3,8 +3,7 @@
 export default {
   allConferencesTitle: "All upcoming conferences",
   website: "Website",
-    // pages: {
-    //   home: 'Home',
-    //   contacts: 'Contacts'
-    // },
-  }
+  start: "Start",
+  end: "End",
+  deadline: "Deadline to express interest",
+}

@@ -5,11 +5,11 @@
         </div>
         <nuxt-link class="conf-image" :to="localePath('confFullView')">
             <!-- TODO: make image link to website as well -->
-            <img :src="image" />
+            <img :src="image" @error="imgPlaceholder" />
         </nuxt-link>
         <div class="conf-dates">
-            <p><b>Start</b>: {{startDate}}</p>
-            <p><b>End</b>: {{endDate}}</p>
+            <p><b>{{ $t('start') }}</b>: {{startDate}}</p>
+            <p><b>{{ $t('end') }}</b>: {{endDate}}</p>
         </div>
         <div class="conf-details">
             <div class="details-item conf-location">
@@ -70,6 +70,9 @@ export default {
         },
     },
     methods: {
+        imgPlaceholder(e) {
+            e.target.src = "/images/no-image-found.png"
+        }
     },
     components: {
     },
@@ -109,16 +112,23 @@ export default {
 }
 .conf-image {
     text-align: center;
-    transition: all .2s ease-in-out;
-}
-.conf-image:hover {
-    transform: scale(0.9); 
 }
 .conf-image img {
     max-width: 300px;
     max-height: 200px;
+    transition: all .2s ease-in-out;
+}
+.conf-image img:hover {
+    transform: scale(0.95); 
+    box-shadow: 2px 7px 23px -1px rgba(0,0,0,0.75);
 }
 a {
     text-decoration: none;
+}
+.details-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-height: 60px;
 }
 </style>

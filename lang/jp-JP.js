@@ -2,9 +2,8 @@
 
 export default {
   allConferencesTitle: "このアプリケーションへようこそ！",
-  website: "Website",
-    // pages: {
-    //   home: 'Pagina iniziale',
-    //   contacts: 'Contatti'
-    // },
-  }
+  website: "ウェブサイト",
+  start: "開始",
+  end: "終わり",
+  deadline: "締め切り",
+}
