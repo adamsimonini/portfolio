@@ -9,9 +9,9 @@
       sm8
       md6
     >
-    <h2>{{ $t('allConferencesTitle')}}</h2>
     <!-- <LangToggle />
     <nuxt-link :to="localePath('inspire')">inspire</nuxt-link> -->
+    <h2>{{ $t('allConferencesTitle')}}</h2>
     <div class="all-conferneces">
       <ConfCard 
         v-for="(conf, i) in conferences" 
@@ -72,19 +72,24 @@ export default {
 </script>
 
 <style scoped>
+.container{
+  max-width: 1250px;
+}
 .all-conferneces {
   display: flex;
   align-content: space-evenly;
   flex-wrap: wrap;
   margin: 0 5%;
+}
+h2 {
+  margin: 0 6%;
 }
 @media only screen and (max-width: 1400px) {
-.all-conferneces {
-  display: flex;
-  justify-content: center;
-  align-content: space-evenly;
-  flex-wrap: wrap;
-  margin: 0 5%;
-}
+  .all-conferneces {
+    display: flex;
+    justify-content: center;
+    align-content: space-evenly;
+    flex-wrap: wrap;
+  }
 }
 </style>

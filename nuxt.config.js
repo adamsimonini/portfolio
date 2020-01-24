@@ -40,7 +40,11 @@ export default {
   */
   buildModules: [
     '@nuxtjs/vuetify',
+    '@nuxtjs/moment',
   ],
+  moment: {
+    locales: ['fr', 'ja']
+  },
   /*
   ** Nuxt.js modules
   */

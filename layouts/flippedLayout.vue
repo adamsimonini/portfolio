@@ -104,7 +104,7 @@ export default {
       ],
       miniVariant: false,
       right: true,
-      title: 'Vertical Flip Layout'
+      title: "PSD Conference Tracker"
     }
   }
 }

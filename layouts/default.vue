@@ -53,7 +53,7 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title v-text="title"/>
       <v-spacer />
     </v-app-bar>
     <v-content>
@@ -102,7 +102,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Default Layout'
+      title: "PSD Conference Tracker",
     }
   },
   created() {

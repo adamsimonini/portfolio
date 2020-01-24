@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="deadline">
-            Deadline to express interest: {{deadline}}
+            {{ $t("deadline") }}: {{deadline}}
         </div>
     </div>
 </template>

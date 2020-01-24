@@ -17,7 +17,7 @@
                 </div>
                 <!-- TODO: Add disabled when no link is provided  -->
                 <div class="details-item conf-website">
-                    <v-btn :href="`//${this.website}`" target="_blank">
+                    <v-btn :href="`//${this.website}`" target="_blank" large>
                         <v-icon>mdi-link-variant</v-icon>
                         <span>{{ $t('website')}}</span>
                     </v-btn>
@@ -28,8 +28,36 @@
             </div>
         </div>
     </div>
+    <v-row>
+        <v-col cols="12" sm="1">
+            <v-menu
+                ref="menu"
+                v-model="menu"
+                :close-on-content-click="false"
+                :return-value.sync="date"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+            >
+                <template v-slot:activator="{ on }">
+                <v-text-field
+                    v-model="date"
+                    label="Start Date"
+                    prepend-icon="mdi-calendar-month"
+                    readonly
+                    v-on="on"
+                ></v-text-field>
+                </template>
+                <v-date-picker v-model="date" no-title scrollable readonly>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+                <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                </v-date-picker>
+            </v-menu>
+        </v-col>
+    </v-row>
     <div class="download">
-        <v-btn href="https://cdn.hswstatic.com/gif/water-life-crop.jpg" download>
+        <v-btn href="https://cdn.hswstatic.com/gif/water-life-crop.jpg" large>
             <span>View {{reports.name}}'s Report</span>
             <v-icon>mdi-file-document</v-icon>
         </v-btn>
@@ -48,6 +76,10 @@ import {conferences} from '@@/static/conferences.js';
     data: function () {
       return {
         layout: this.$store.state.layout,
+        date: new Date().toISOString().substr(0, 10),
+        menu: false,
+        modal: false,
+        menu2: false,
       }
     },
     props: {
@@ -94,20 +126,12 @@ import {conferences} from '@@/static/conferences.js';
                 }
             }
         }
-        // reportName: {
-        //     type: String,
-        //     default: conferences[0].reports.name,
-        // },
-        // reportUrl: {
-        //     type: String,
-        //     default: conferences[0].reports.url,
-        // },
     },
     layout: 'default',
     components: {
     },
     computed: {
-      },
+    },
     methods: {
         imgPlaceholder(e) {
             e.target.src = "/images/no-image-found.png"

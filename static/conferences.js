@@ -1,3 +1,4 @@
+// TODO: tagging system; filtering by tag; organize by upcoming vs past; filter by year;
 export const conferences = [
     {
       title: "Archangel Summit 2020",
