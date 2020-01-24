@@ -10,6 +10,10 @@ export const conferences = [
       },
       website: "www.google.com",
       deadline: "01/31/2020",
+      reports: {
+        name: "Sarah",
+        url: "www.google.com",
+      }
     },
     {
       title: "Our Present Future",

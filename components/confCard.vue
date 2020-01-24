@@ -4,7 +4,6 @@
             <h3>{{title}}</h3>
         </div>
         <nuxt-link class="conf-image" :to="localePath('confFullView')">
-            <!-- TODO: make image link to website as well -->
             <img :src="image" @error="imgPlaceholder" />
         </nuxt-link>
         <div class="conf-dates">
@@ -89,6 +88,7 @@ export default {
     white-space:nowrap;
     text-overflow:ellipsis;
     max-width: 300px;
+    margin-bottom: 10px;
 }
 .conf-dates {
     display: flex;
@@ -117,10 +117,11 @@ export default {
     max-width: 300px;
     max-height: 200px;
     transition: all .2s ease-in-out;
+    border-radius: 10px;
 }
 .conf-image img:hover {
     transform: scale(0.95); 
-    box-shadow: 2px 7px 23px -1px rgba(0,0,0,0.75);
+    box-shadow: 2px 7px 23px -4px rgba(0,0,0,0.75);
 }
 a {
     text-decoration: none;

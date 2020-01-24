@@ -65,7 +65,7 @@
       :fixed="fixed"
       app
     >
-      <span>&copy; 2019</span>
+      <span>&copy; 2020</span>
     </v-footer>
   </v-app>
 </template>

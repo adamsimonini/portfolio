@@ -74,8 +74,17 @@ export default {
 <style scoped>
 .all-conferneces {
   display: flex;
-  justify-content: space-evenly;
   align-content: space-evenly;
   flex-wrap: wrap;
+  margin: 0 5%;
+}
+@media only screen and (max-width: 1400px) {
+.all-conferneces {
+  display: flex;
+  justify-content: center;
+  align-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 0 5%;
+}
 }
 </style>

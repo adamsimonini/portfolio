@@ -34,7 +34,6 @@ export default {
   */
   plugins: [
     {src: '~/plugins/utilities.js'},
-    {src: '~/plugins/pathing.js'},
   ],
   /*
   ** Nuxt.js dev-modules

@@ -70,7 +70,7 @@
       :fixed="fixed"
       app
     >
-      <span>&copy; 2019</span>
+      <span>&copy; 2020</span>
     </v-footer>
   </v-app>
 </template>
@@ -79,7 +79,6 @@
 import LangToggle from '@c/langToggle.vue';
 import ThemeToggle from '@c/themeToggle.vue';
 import LayoutToggle from '@c/layoutToggle.vue'
-
 export default {
   components: {
     LangToggle,

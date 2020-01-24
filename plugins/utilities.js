@@ -1,6 +1,7 @@
 /* 
-this is the plugin that allows for global functions (i.e., functions implicitly accessible to all complnents without the need for explicit implart statements)
-Components can access these functions via "this.functionName"
+this is the plugin that allows for global functions (i.e., functions implicitly accessible to all complnents without the need for explicit import statements)
+Since these functions get added to the Vue instance (Vue.prototype.functionName), 
+compoents can access these functions via "this.functionName"
 */
 
 import Vue from 'vue';
