@@ -55,10 +55,6 @@ export default {
   i18n: {
     locales: [
       {
-        code: "en",
-        name: "English",
-      },
-      {
         code: 'fr',
         name: "français"
       
@@ -66,7 +62,11 @@ export default {
       {
         code: 'jp',
         name: "日本語"
-      }
+      },
+      {
+        code: "en",
+        name: "English",
+      },
     ],
     detectBrowserLanguage: {
       useCookie: true,

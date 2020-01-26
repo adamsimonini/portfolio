@@ -6,4 +6,5 @@ export default {
   start: "Start",
   end: "End",
   deadline: "Deadline to express interest",
+  close: "Close",
 }

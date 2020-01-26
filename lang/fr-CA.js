@@ -6,4 +6,5 @@ export default {
   start: "début",
   end: "fin",
   deadline: "date limite",
+  close: "Fermer",
 }

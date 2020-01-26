@@ -29,29 +29,53 @@
         </div>
     </div>
     <v-row>
-        <v-col cols="12" sm="1">
+        <v-col cols="12" md="2" sm="6">
             <v-menu
                 ref="menu"
-                v-model="menu"
+                v-model="picker.start.menu"
                 :close-on-content-click="false"
-                :return-value.sync="date"
+                :return-value.sync="picker.start.date"
                 transition="scale-transition"
                 offset-y
                 min-width="290px"
             >
                 <template v-slot:activator="{ on }">
                 <v-text-field
-                    v-model="date"
+                    v-model="picker.start.date"
                     label="Start Date"
                     prepend-icon="mdi-calendar-month"
                     readonly
                     v-on="on"
                 ></v-text-field>
                 </template>
-                <v-date-picker v-model="date" no-title scrollable readonly>
+                <v-date-picker v-model="picker.start.date" no-title scrollable readonly>
                 <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                <v-btn text color="primary" @click="picker.start.menu = false">{{ $t("close") }}</v-btn>
+                </v-date-picker>
+            </v-menu>
+        </v-col>
+        <v-col cols="12" md="2" sm="6">
+            <v-menu
+                ref="menu"
+                v-model="picker.end.menu"
+                :close-on-content-click="false"
+                :return-value.sync="picker.end.date"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+            >
+                <template v-slot:activator="{ on }">
+                <v-text-field
+                    v-model="picker.end.date"
+                    label="End Date"
+                    prepend-icon="mdi-calendar-month"
+                    readonly
+                    v-on="on"
+                ></v-text-field>
+                </template>
+                <v-date-picker v-model="picker.end.date" no-title scrollable readonly>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="picker.end.menu = false">{{ $t("close") }}</v-btn>
                 </v-date-picker>
             </v-menu>
         </v-col>
@@ -70,16 +94,28 @@ import LangToggle from '@c/langToggle.vue';
 import ThemeToggle from '@c/themeToggle.vue';
 import { mapState } from 'vuex';
 import {conferences} from '@@/static/conferences.js';
+import moment from 'moment'
 
   export default {
     name: 'confFullView',
     data: function () {
       return {
         layout: this.$store.state.layout,
-        date: new Date().toISOString().substr(0, 10),
-        menu: false,
-        modal: false,
-        menu2: false,
+        picker: {
+            start: {
+                menu: false,
+                date: moment().format("Do MMM YY"),
+                // date: new Date().toISOString().substr(0, 10),
+                modal: false,
+                menu2: false,
+            },
+            end: {
+                menu: false,
+                date: new Date().toISOString().substr(0, 10),
+                modal: false,
+                menu2: false,
+            },
+        },
       }
     },
     props: {
