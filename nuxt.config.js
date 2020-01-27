@@ -52,6 +52,9 @@ export default {
     '@nuxtjs/pwa',
     'nuxt-i18n', 
   ],
+  generate: {
+    fallback: true
+  },
   i18n: {
     locales: [
       {
