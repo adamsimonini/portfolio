@@ -9,8 +9,8 @@ export default {
   ** Headers of the page
   */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    titleTemplate: '%s - ' + "Find your conference",
+    title: "Conference Tracker" || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -55,6 +55,10 @@ export default {
   i18n: {
     locales: [
       {
+        code: "en",
+        name: "English",
+      },
+      {
         code: 'fr',
         name: "français"
       
@@ -62,10 +66,6 @@ export default {
       {
         code: 'jp',
         name: "日本語"
-      },
-      {
-        code: "en",
-        name: "English",
       },
     ],
     detectBrowserLanguage: {

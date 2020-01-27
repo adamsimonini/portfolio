@@ -81,7 +81,7 @@ export default {
 <style scoped>
 .conf-card {
     max-width: 300px;
-    margin: 20px 20px;
+    margin: 40px 20px;
 }
 .conf-title {
     overflow:hidden;

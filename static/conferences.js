@@ -3,17 +3,18 @@ export const conferences = [
     {
       title: "Archangel Summit 2020",
       image: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F68822197%2F45360628177%2F1%2Foriginal.20190815-220126?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C120%2C1920%2C960&s=e6509fb0cca8e30a4ae749cc1a99fbaa",
-      startDate: "02/15/2020",
-      endDate: "17/02/2020",
+      // must be YYYY-MM-DD
+      startDate: "2020-09-18",
+      endDate: "2020-09-19",
       location: {
           city: "Ottawa",
           country: "CA"
       },
-      website: "www.google.com",
+      website: "archangelsummit.com/",
       deadline: "01/31/2020",
       reports: {
         name: "Sarah",
-        url: "www.google.com",
+        url: "https://docs.google.com/document/d/1tRbm3gHuXDX_d1xI9TI3ZiPVwYBrRuZ2q7MHE-VVCJ8/edit?usp=sharing",
       }
     },
     {
@@ -25,7 +26,7 @@ export const conferences = [
           city: "Palo Alto",
           country: "US"
       },
-      website: "www.yahoo.com",
+      website: "archangelsummit.com/",
       deadline: "29/02/2020",
     },
     {
@@ -37,7 +38,7 @@ export const conferences = [
         city: "Vancouver",
         country: "CA"
       },
-      website: "www.bing.com",
+      website: "archangelsummit.com/",
       deadline: "",
     },
     {
@@ -49,7 +50,7 @@ export const conferences = [
           city: "Ottawa",
           country: "CA"
       },
-      website: "www.google.com",
+      website: "archangelsummit.com/",
       deadline: "01/31/2020",
     },
     {
@@ -61,7 +62,7 @@ export const conferences = [
           city: "Palo Alto",
           country: "US"
       },
-      website: "www.yahoo.com",
+      website: "archangelsummit.com/",
       deadline: "29/02/2020",
     },
     {
@@ -73,7 +74,7 @@ export const conferences = [
         city: "Calgary",
         country: "CA"
       },
-      website: "www.bing.com",
+      website: "archangelsummit.com/",
       deadline: "",
     }
 ];

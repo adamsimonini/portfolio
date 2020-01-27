@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "description": "My personal portfolio website",
+  "description": "PSD conference tracking web app",
   "author": "Adam Simonini",
   "private": true,
   "scripts": {

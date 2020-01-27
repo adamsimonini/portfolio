@@ -7,8 +7,56 @@
                 <h2>{{title}}</h2>
             </div>
             <div class="conf-dates">
-                <p><b>Start</b>: {{startDate}}</p>
-                <p><b>End</b>: {{endDate}}</p>
+                        <!-- <span>Start Date</span> -->
+                        <v-menu
+                            ref="menu"
+                            v-model="picker.start.menu"
+                            :close-on-content-click="false"
+                            :return-value.sync="picker.start.date"
+                            transition="scale-transition"
+                            offset-y
+                            min-width="290px"
+                        >
+                            <template v-slot:activator="{ on }">
+                            <v-text-field
+                                :value="formatDate(picker.start.date)"
+                                label="Start Date"
+                                prepend-icon="mdi-calendar-month"
+                                readonly
+                                v-on="on"
+                            ></v-text-field>
+                            </template>
+                            <v-date-picker v-model="picker.start.date" no-title scrollable readonly color="green" :locale="locale" show-current="false">
+                            <v-spacer></v-spacer>
+                            <v-btn text color="primary" @click="picker.start.menu = false">{{ $t("close") }}</v-btn>
+                            </v-date-picker>
+                        </v-menu>
+                        <!-- <span>End Date</span> -->
+                        <v-menu
+                            ref="menu"
+                            v-model="picker.end.menu"
+                            :close-on-content-click="false"
+                            :return-value.sync="picker.end.date"
+                            transition="scale-transition"
+                            offset-y
+                            min-width="290px"
+                        >
+                            <template v-slot:activator="{ on }">
+                            <v-text-field
+                                :value="formatDate(picker.end.date)"
+                                label="End Date"
+                                prepend-icon="mdi-calendar-month"
+                                readonly
+                                v-on="on"
+                            ></v-text-field>
+                            </template>
+                            <v-date-picker v-model="picker.end.date" no-title scrollable readonly color="red" :locale="locale" show-current="false">
+                            <v-spacer></v-spacer>
+                            <v-btn text color="primary" @click="picker.end.menu = false">{{ $t("close") }}</v-btn>
+                            </v-date-picker>
+                        </v-menu>
+                <!-- <p><b>Start</b>: {{startDate}}</p>
+                <p><b>End</b>: {{endDate}}</p> -->
             </div>
             <div class="conf-details">
                 <div class="details-item conf-location">
@@ -24,67 +72,15 @@
                 </div>
             </div>
             <div class="conf-deadline">
-                Deadline to express interest: {{deadline}}
+                {{ $t("deadline") }}: {{deadline}}
+            </div>
+            <div class="download" v-if="reports.name">
+                <v-btn href="https://docs.google.com/document/d/1tRbm3gHuXDX_d1xI9TI3ZiPVwYBrRuZ2q7MHE-VVCJ8/edit?usp=sharing" target="_blank" large>
+                    <span>View {{reports.name}}'s Report</span>
+                    <v-icon>mdi-file-document</v-icon>
+                </v-btn>
             </div>
         </div>
-    </div>
-    <v-row>
-        <v-col cols="12" md="2" sm="6">
-            <v-menu
-                ref="menu"
-                v-model="picker.start.menu"
-                :close-on-content-click="false"
-                :return-value.sync="picker.start.date"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                <v-text-field
-                    v-model="picker.start.date"
-                    label="Start Date"
-                    prepend-icon="mdi-calendar-month"
-                    readonly
-                    v-on="on"
-                ></v-text-field>
-                </template>
-                <v-date-picker v-model="picker.start.date" no-title scrollable readonly>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="picker.start.menu = false">{{ $t("close") }}</v-btn>
-                </v-date-picker>
-            </v-menu>
-        </v-col>
-        <v-col cols="12" md="2" sm="6">
-            <v-menu
-                ref="menu"
-                v-model="picker.end.menu"
-                :close-on-content-click="false"
-                :return-value.sync="picker.end.date"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on }">
-                <v-text-field
-                    v-model="picker.end.date"
-                    label="End Date"
-                    prepend-icon="mdi-calendar-month"
-                    readonly
-                    v-on="on"
-                ></v-text-field>
-                </template>
-                <v-date-picker v-model="picker.end.date" no-title scrollable readonly>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="picker.end.menu = false">{{ $t("close") }}</v-btn>
-                </v-date-picker>
-            </v-menu>
-        </v-col>
-    </v-row>
-    <div class="download">
-        <v-btn href="https://cdn.hswstatic.com/gif/water-life-crop.jpg" large>
-            <span>View {{reports.name}}'s Report</span>
-            <v-icon>mdi-file-document</v-icon>
-        </v-btn>
     </div>
 </div>
 </template>
@@ -101,17 +97,18 @@ import moment from 'moment'
     data: function () {
       return {
         layout: this.$store.state.layout,
+        locale: '',
+        date: new Date().toISOString().substr(0, 10),
         picker: {
             start: {
                 menu: false,
-                date: moment().format("Do MMM YY"),
-                // date: new Date().toISOString().substr(0, 10),
+                date: conferences[0].startDate,
                 modal: false,
                 menu2: false,
             },
             end: {
                 menu: false,
-                date: new Date().toISOString().substr(0, 10),
+                date: conferences[0].endDate,
                 modal: false,
                 menu2: false,
             },
@@ -171,7 +168,15 @@ import moment from 'moment'
     methods: {
         imgPlaceholder(e) {
             e.target.src = "/images/no-image-found.png"
-        }
+        },
+        formatDate (date) {
+            moment.locale(this.locale);
+            return this.date ? moment(date).format('dddd, MMMM Do YYYY') : ''
+        },
+    },
+    created() {
+        this.locale = this.$i18n.locale;
+        console.log("date= " + new Date().toISOString().substr(0, 10));
     },
   }
 </script>
@@ -180,6 +185,7 @@ import moment from 'moment'
 .conf-card {
     font-size: 25px;
     display: flex;
+    margin-top: 10%;
 }
 .all-conf-info {
     display: grid;
@@ -190,25 +196,27 @@ import moment from 'moment'
         ". title ."
         ". dates ."
         ". details ."
-        ". deadline .";
+        ". deadline ."
+        ". download .";
 }
 .conf-image {
     width: 100%;
     min-width: 250px;
-    max-width: 50%;
+    max-width: 40%;
     grid-area: image;
     border-radius: 10px;
 }
 @media only screen and (max-width: 1050px) {
     .conf-card {
-        margin: 0 5%;
+        margin: 10% 10%;
         font-size: 25px;
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
     }
     .all-conf-info {
         display: grid;
-        width: 100%;
+        width: 80%;
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         grid-row-gap: 20px;
@@ -216,16 +224,19 @@ import moment from 'moment'
             "title"
             "dates"
             "details"
-            "deadline";
+            "deadline"
+            "download";
     }
     .conf-image {
-        width: 100%;
-        max-width: 100%;
+        max-width: 80%;
         grid-area: image;
     }
     .download {
         justify-content: flex-start;
         margin: 20px 5%;
+    }
+    .conf-dates div{
+        width: 100%;
     }
 }
 .conf-title {
@@ -242,10 +253,11 @@ import moment from 'moment'
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    flex-wrap: wrap;
     grid-area: dates;
 }
-.conf-dates p {
-    width: 50%;
+.v-text-field__slot:hover {
+    cursor: pointer !important;
 }
 .conf-details {
     display: flex;
@@ -255,6 +267,7 @@ import moment from 'moment'
 }
 .conf-details div{
     width: 50%;
+    padding: 0 10% 0 0;
 }
 .details-item {
     width: 33%;
@@ -275,9 +288,7 @@ a {
     text-decoration: none;
 }
 .download {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    grid-area: download;
     margin: 20px 0;
     width: 100%;
 }

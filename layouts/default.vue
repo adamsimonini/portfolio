@@ -107,7 +107,6 @@ export default {
   },
   created() {
     this.locale = this.$i18n.locale;
-    console.log(this.$i18n.locale)
   },
 }
 </script>
