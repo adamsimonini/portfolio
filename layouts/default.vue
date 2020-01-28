@@ -9,21 +9,27 @@
       fixed
       app
     >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
+      <v-list
+      nav
+      >
+        <v-list-item-group>
+          <nuxt-link class="nuxt-link" :to="localePath('index')">
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-apps</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>Home</v-list-item-content>
+            </v-list-item>
+          </nuxt-link>
+          <nuxt-link class="nuxt-link" :to="localePath('inspire')">
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-chart-bubble</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>Inspire</v-list-item-content>
+            </v-list-item>
+          </nuxt-link>
+        </v-list-item-group>
         <ThemeToggle />
         <LayoutToggle />
         <LangToggle />
@@ -87,26 +93,36 @@ export default {
       clipped: false,
       drawer: true,
       fixed: false,
+      item: 0,
       items: [
         {
           icon: 'mdi-apps',
           title: 'Welcome',
-          to: "/en"
+          path: "/"
         },
         {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
-          to: '/en/inspire'
+          path: '/inspire'
         },
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: "PSD Conference Tracker",
+      // title: "PSD Conference Tracker",
     }
   },
   created() {
     this.locale = this.$i18n.locale;
   },
+  methods: {
+  },
 }
 </script>
+
+<style>
+.nuxt-link{
+  width: 100%;
+}
+</style>

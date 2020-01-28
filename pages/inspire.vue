@@ -7,7 +7,7 @@
         class="mb-5"
       >
       <blockquote class="blockquote">
-        &#8220;where there is a will, there is a hue!&#8221;
+        &#8220;{{ $t('inspire') }}&#8221;
         <footer>
           <small>
             <em>&mdash;John Johnson</em>

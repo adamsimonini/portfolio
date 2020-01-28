@@ -7,56 +7,54 @@
                 <h2>{{title}}</h2>
             </div>
             <div class="conf-dates">
-                        <!-- <span>Start Date</span> -->
-                        <v-menu
-                            ref="menu"
-                            v-model="picker.start.menu"
-                            :close-on-content-click="false"
-                            :return-value.sync="picker.start.date"
-                            transition="scale-transition"
-                            offset-y
-                            min-width="290px"
-                        >
-                            <template v-slot:activator="{ on }">
-                            <v-text-field
-                                :value="formatDate(picker.start.date)"
-                                label="Start Date"
-                                prepend-icon="mdi-calendar-month"
-                                readonly
-                                v-on="on"
-                            ></v-text-field>
-                            </template>
-                            <v-date-picker v-model="picker.start.date" no-title scrollable readonly color="green" :locale="locale" show-current="false">
-                            <v-spacer></v-spacer>
-                            <v-btn text color="primary" @click="picker.start.menu = false">{{ $t("close") }}</v-btn>
-                            </v-date-picker>
-                        </v-menu>
-                        <!-- <span>End Date</span> -->
-                        <v-menu
-                            ref="menu"
-                            v-model="picker.end.menu"
-                            :close-on-content-click="false"
-                            :return-value.sync="picker.end.date"
-                            transition="scale-transition"
-                            offset-y
-                            min-width="290px"
-                        >
-                            <template v-slot:activator="{ on }">
-                            <v-text-field
-                                :value="formatDate(picker.end.date)"
-                                label="End Date"
-                                prepend-icon="mdi-calendar-month"
-                                readonly
-                                v-on="on"
-                            ></v-text-field>
-                            </template>
-                            <v-date-picker v-model="picker.end.date" no-title scrollable readonly color="red" :locale="locale" show-current="false">
-                            <v-spacer></v-spacer>
-                            <v-btn text color="primary" @click="picker.end.menu = false">{{ $t("close") }}</v-btn>
-                            </v-date-picker>
-                        </v-menu>
-                <!-- <p><b>Start</b>: {{startDate}}</p>
-                <p><b>End</b>: {{endDate}}</p> -->
+                <!-- <span>Start Date</span> -->
+                <v-menu
+                    ref="menu"
+                    v-model="picker.start.menu"
+                    :close-on-content-click="false"
+                    :return-value.sync="picker.start.date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
+                >
+                    <template v-slot:activator="{ on }">
+                    <v-text-field
+                        :value="formatDate(picker.start.date)"
+                        label="Start Date"
+                        prepend-icon="mdi-calendar-month"
+                        readonly
+                        v-on="on"
+                    ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="picker.start.date" no-title scrollable readonly color="green" :locale="locale" show-current="false">
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="picker.start.menu = false">{{ $t("close") }}</v-btn>
+                    </v-date-picker>
+                </v-menu>
+                <!-- <span>End Date</span> -->
+                <v-menu
+                    ref="menu"
+                    v-model="picker.end.menu"
+                    :close-on-content-click="false"
+                    :return-value.sync="picker.end.date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
+                >
+                    <template v-slot:activator="{ on }">
+                    <v-text-field
+                        :value="formatDate(picker.end.date)"
+                        label="End Date"
+                        prepend-icon="mdi-calendar-month"
+                        readonly
+                        v-on="on"
+                    ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="picker.end.date" no-title scrollable readonly color="red" :locale="locale" show-current="false">
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="picker.end.menu = false">{{ $t("close") }}</v-btn>
+                    </v-date-picker>
+                </v-menu>
             </div>
             <div class="conf-details">
                 <div class="details-item conf-location">
@@ -176,7 +174,6 @@ import moment from 'moment'
     },
     created() {
         this.locale = this.$i18n.locale;
-        console.log("date= " + new Date().toISOString().substr(0, 10));
     },
   }
 </script>

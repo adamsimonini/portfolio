@@ -71,10 +71,11 @@ export default {
         name: "日本語"
       },
     ],
+    defaultLocale: "en",
+    defaultLocaleRouteNameSuffix: "prefix_and_default",
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      alwaysRedirect: false,
       fallbackLocale: 'en',
     },
     vueI18n: {

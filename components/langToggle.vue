@@ -1,9 +1,9 @@
 <template>
     <div>
-        <v-select
+        <!-- <v-select
           :items="items"
           label="language"
-        ></v-select>
+        ></v-select> -->
         <nuxt-link :to="switchLocalePath('en')">English</nuxt-link>
         <nuxt-link :to="switchLocalePath('fr')">Français</nuxt-link>
         <nuxt-link :to="switchLocalePath('jp')">日本語</nuxt-link>

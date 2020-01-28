@@ -55,11 +55,12 @@ export default {
   },
   created () {
     this.conferences = conferences;
+    console.log(this.$getCookie("i18n_redirected"));
   },
   methods: {
     flipLayout: function () {
       // console.log(getCookie("i18n_redirected"));
-      console.log(this.$getCookie("i18n_redirected"));
+      // console.log(this.$getCookie("i18n_redirected"));
 
       // this functional changes which layout the component is using, as seen in the :root/layout folder
       let currentLayout = this.$nuxt.$data.layoutName;
