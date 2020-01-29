@@ -75,5 +75,6 @@ export default {
 <style>
 .nuxt-link{
   width: 100%;
+  text-decoration: none;
 }
 </style>
