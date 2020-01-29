@@ -2,62 +2,18 @@
 
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list
-      nav
-      >
-        <v-list-item-group>
-          <nuxt-link class="nuxt-link" :to="localePath('index')">
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-apps</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>Home</v-list-item-content>
-            </v-list-item>
-          </nuxt-link>
-          <nuxt-link class="nuxt-link" :to="localePath('inspire')">
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-chart-bubble</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>Inspire</v-list-item-content>
-            </v-list-item>
-          </nuxt-link>
-        </v-list-item-group>
-        <ThemeToggle />
-        <LayoutToggle />
-        <LangToggle />
-      </v-list>
-    </v-navigation-drawer>
+    <NavDrawer :navOptions="navOptions"/>
     <v-app-bar
       :clipped-left="clipped"
       fixed
       app
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="navOptions.drawer = !navOptions.drawer" />
       <v-btn
         icon
-        @click.stop="miniVariant = !miniVariant"
+        @click.stop="navOptions.mini = !navOptions.mini"
       >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>mdi-minus</v-icon>
+        <v-icon>mdi-{{ `chevron-${navOptions.mini ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title"/>
       <v-spacer />
@@ -77,23 +33,22 @@
 </template>
 
 <script>
-import LangToggle from '@c/langToggle.vue';
-import ThemeToggle from '@c/themeToggle.vue';
-import LayoutToggle from '@c/layoutToggle.vue'
+import NavDrawer from '@c/navDrawer.vue';
 
 export default {
   components: {
-    LangToggle,
-    ThemeToggle,
-    LayoutToggle,
+    NavDrawer,
   },
   data() {
     return {
       locale: '',
       clipped: false,
-      drawer: true,
       fixed: false,
       item: 0,
+      navOptions: {
+        drawer: true,
+        mini: false,
+      },
       items: [
         {
           icon: 'mdi-apps',
@@ -106,11 +61,7 @@ export default {
           path: '/inspire'
         },
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
       title: "PSD Conference Tracker",
-      // title: "PSD Conference Tracker",
     }
   },
   created() {
