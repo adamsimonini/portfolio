@@ -5,7 +5,7 @@
         <!-- <v-icon>mdi-page-layout-sidebar-right</v-icon> -->
       </v-list-item-action>
       <v-list-item-content>
-        Flip layout
+        {{ $t('flipLayout') }}
       </v-list-item-content>
     </v-list-item>
 </template>

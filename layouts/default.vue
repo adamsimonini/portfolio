@@ -15,7 +15,7 @@
       >
         <v-icon>mdi-{{ `chevron-${navOptions.mini ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title"/>
+      <v-toolbar-title v-text="this.$t('conferenceTracker')"/>
       <v-spacer />
     </v-app-bar>
     <v-content>

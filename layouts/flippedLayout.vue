@@ -7,22 +7,22 @@
       fixed
       app
     >
+      <v-spacer />
       <v-app-bar-nav-icon @click.stop="navOptions.drawer = !navOptions.drawer" />
       <v-btn
         icon
         @click.stop="navOptions.mini = !navOptions.mini"
       >
-        <v-icon>mdi-{{ `chevron-${navOptions.mini ? 'right' : 'left'}` }}</v-icon>
+        <v-icon>mdi-{{ `chevron-${navOptions.mini ? 'left' : 'right'}` }}</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title"/>
-      <v-spacer />
     </v-app-bar>
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <NavDrawer :navOptions="navOptions" right="true"/>
+    <NavDrawer :navOptions="navOptions" :right='true'/>
     <v-footer
       :fixed="fixed"
       app
