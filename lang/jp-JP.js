@@ -2,12 +2,12 @@
 
 export default {
   allConferencesTitle: "このアプリケーションへようこそ！",
-  home: "ホーム",
-  website: "ウェブサイト",
-  start: "開始",
-  end: "終わり",
-  deadline: "締め切り",
   close: "閉じる",
+  deadline: "締め切り",
+  end: "終わり",
   fourzerofour: "404エラー：ページが見つかりません",
+  home: "ホーム",
   inspire: "これは感動的な引用です！",
+  start: "開始",
+  website: "ウェブサイト",
 }

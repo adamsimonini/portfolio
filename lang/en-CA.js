@@ -1,14 +1,14 @@
 // totality of English translations
 
 export default {
-  conferenceTracker: "PSD Conference Tracker",
-  home: "Home",
   allConferencesTitle: "All upcoming conferences",
-  website: "Website",
-  start: "Start",
-  end: "End",
-  deadline: "Deadline to express interest",
   close: "Close",
+  conferenceTracker: "PSD Conference Tracker",
+  deadline: "Deadline to express interest",
+  end: "End",
   fourzerofour: "404 error: page not found",
+  home: "Home",
   inspire: "This is an inspiring quote!",
+  start: "Start",
+  website: "Website",
 }
