@@ -2,6 +2,7 @@
 
 export default {
   conferenceTracker: "PSD Conference Tracker",
+  home: "Home",
   allConferencesTitle: "All upcoming conferences",
   website: "Website",
   start: "Start",

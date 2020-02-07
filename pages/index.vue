@@ -36,13 +36,35 @@ import ThemeToggle from '@c/themeToggle.vue'
 import ConfCard from '@c/confCard.vue'
 import { mapState } from 'vuex'
 import {conferences} from '@@/static/conferences.js'
+// console.log(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size'));
+// document.documentElement.style.setProperty('--base-font-size', '20');
+// console.log(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size'));
 
 export default {
   name: 'Index',
   data: function () {
     return {
-      layout: this.$store.state.layout,
-      conferences: [],
+      locale: '',
+      clipped: false,
+      fixed: false,
+      item: 0,
+      navOptions: {
+        drawer: true,
+        mini: false,
+      },
+      items: [
+        {
+          icon: 'mdi-apps',
+          title: 'Welcome',
+          path: "/"
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Inspire',
+          path: '/inspire'
+        },
+      ],
+      title: "PSD Conference Tracker",
     }
   },
   layout: 'default',

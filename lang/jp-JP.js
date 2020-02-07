@@ -2,6 +2,7 @@
 
 export default {
   allConferencesTitle: "このアプリケーションへようこそ！",
+  home: "ホーム",
   website: "ウェブサイト",
   start: "開始",
   end: "終わり",

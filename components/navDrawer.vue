@@ -4,6 +4,7 @@
       :mini-variant="navOptions.mini"
       :clipped="clipped"
       fixed
+      :right=right
       app
     >
       <v-list
@@ -15,7 +16,7 @@
               <v-list-item-icon>
                 <v-icon>mdi-apps</v-icon>
               </v-list-item-icon>
-              <v-list-item-content>Home</v-list-item-content>
+              <v-list-item-content>{{ $t("home") }}</v-list-item-content>
             </v-list-item>
           </nuxt-link>
           <nuxt-link class="nuxt-link" :to="localePath('inspire')">
@@ -51,15 +52,19 @@ export default {
         fixed: false,
     }),
     props: {
-        navOptions: {
-            type: Object,
-            default: () => {
-                return {
-                    drawer: true,
-                    mini: false,
-                }
-            }
-        },
+      right: {
+        type: Boolean,
+        default: false,
+      },
+      navOptions: {
+          type: Object,
+          default: () => {
+              return {
+                  drawer: true,
+                  mini: false,
+              }
+          }
+      },
     },
     methods: {
     },

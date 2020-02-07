@@ -1,0 +1,33 @@
+:root {
+    --base-font-size: 10px
+}
+
+html {
+    font-size: var(--base-font-size);
+}
+
+p {
+    font-size: 1.1rem;
+}
+
+span {
+    font-size: 1rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+/* .container{
+    font-size: var(--base-font-size)
+} */
+
+/* body {
+    font-size: 10px;
+}
+
+/* document.documentElement.style.setProperty(' --base-font-size', '30'); */

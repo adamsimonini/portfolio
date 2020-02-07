@@ -2,6 +2,7 @@
 
 export default {
   conferenceTracker: "Suivi de conférence PSD",
+  home: "Accueil",
   allConferencesTitle: "Bienvenue dans cette application!",
   website: "site Internet",
   start: "début",

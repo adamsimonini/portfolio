@@ -7,65 +7,22 @@
       fixed
       app
     >
+      <v-app-bar-nav-icon @click.stop="navOptions.drawer = !navOptions.drawer" />
+      <v-btn
+        icon
+        @click.stop="navOptions.mini = !navOptions.mini"
+      >
+        <v-icon>mdi-{{ `chevron-${navOptions.mini ? 'right' : 'left'}` }}</v-icon>
+      </v-btn>
+      <v-toolbar-title v-text="title"/>
       <v-spacer />
-      <v-toolbar-title v-text="title" />
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      </v-btn>
     </v-app-bar>
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      right
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-        <ThemeToggle />
-        <LayoutToggle />
-        <LangToggle />
-      </v-list>
-    </v-navigation-drawer>
+    <NavDrawer :navOptions="navOptions" right="true"/>
     <v-footer
       :fixed="fixed"
       app
@@ -76,35 +33,36 @@
 </template>
 
 <script>
-import LangToggle from '@c/langToggle.vue';
-import ThemeToggle from '@c/themeToggle.vue';
-import LayoutToggle from '@c/layoutToggle.vue'
+import NavDrawer from '@c/navDrawer.vue';
+
 export default {
   components: {
-    LangToggle,
-    ThemeToggle,
-    LayoutToggle,
+    NavDrawer
   },
   data () {
     return {
+      locale: '',
       clipped: false,
-      drawer: true,
       fixed: false,
+      item: 0,
+      // right: true,
+      navOptions: {
+        drawer: true,
+        mini: false,
+      },
       items: [
         {
           icon: 'mdi-apps',
           title: 'Welcome',
-          to: '/en'
+          path: "/"
         },
         {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
-          to: '/en/inspire'
-        }
+          path: '/inspire'
+        },
       ],
-      miniVariant: false,
-      right: true,
-      title: "PSD Conference Tracker"
+      title: "PSD Conference Tracker (Flipped)",
     }
   }
 }
