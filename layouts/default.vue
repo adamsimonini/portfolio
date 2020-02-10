@@ -19,7 +19,7 @@
       <v-spacer />
     </v-app-bar>
     <v-content>
-      <v-container>
+      <v-container id="container">
         <nuxt />
       </v-container>
     </v-content>
@@ -71,9 +71,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .nuxt-link{
   width: 100%;
   text-decoration: none;
+}
+#container {
+  max-width: 80%;
 }
 </style>

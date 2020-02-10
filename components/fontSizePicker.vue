@@ -6,6 +6,7 @@
         ></v-select> -->
         <p>Font size picker</p>
         <span>Font size: {{fontSize}}</span>
+        </br>
         <v-btn @click="fontChange('+')">+</v-btn>
         <v-btn @click="fontChange('-')">-</v-btn>
     </div>
