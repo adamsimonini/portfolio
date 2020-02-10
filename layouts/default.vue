@@ -60,7 +60,6 @@ export default {
           path: '/inspire'
         },
       ],
-      title: "PSD Conference Tracker",
     }
   },
   created() {

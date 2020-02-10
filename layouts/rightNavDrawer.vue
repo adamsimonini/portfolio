@@ -15,7 +15,7 @@
       >
         <v-icon>mdi-{{ `chevron-${navOptions.mini ? 'left' : 'right'}` }}</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title"/>
+      <v-toolbar-title v-text="this.$t('conferenceTracker')"/>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -62,7 +62,6 @@ export default {
           path: '/inspire'
         },
       ],
-      title: "PSD Conference Tracker (Flipped)",
     }
   }
 }

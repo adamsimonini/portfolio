@@ -36,7 +36,7 @@ import { mapState } from 'vuex'
       ThemeToggle,
     },
     computed: {
-      },
+    },
     methods: {
       flipLayout: function () {
         // console.log(getCookie("i18n_redirected"));

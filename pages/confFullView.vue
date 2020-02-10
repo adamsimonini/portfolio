@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="conf-deadline">
-                {{ $t("deadline") }}: {{deadline}}
+                <span>{{ $t("deadline") }}: {{deadline}}</span>
             </div>
             <div class="download" v-if="reports.name">
                 <v-btn href="https://docs.google.com/document/d/1tRbm3gHuXDX_d1xI9TI3ZiPVwYBrRuZ2q7MHE-VVCJ8/edit?usp=sharing" target="_blank" large>
@@ -187,7 +187,7 @@ import moment from 'moment'
 .all-conf-info {
     display: grid;
     width: 60%;
-    grid-template-columns: 10% 1fr 10%;
+    grid-template-columns: 5% 1fr 5%;
     grid-template-rows: auto;
     grid-template-areas: 
         ". title ."
@@ -240,7 +240,7 @@ import moment from 'moment'
     overflow:hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
-    max-width: 500px;
+    max-width: 100%;
     grid-area: title;
     display: flex;
     justify-content: flex-start;

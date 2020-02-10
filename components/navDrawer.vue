@@ -32,6 +32,7 @@
         <ThemeToggle />
         <LayoutToggle />
         <LangToggle />
+        <FontSizePicker />
       </v-list>
     </v-navigation-drawer>
 </template>
@@ -40,6 +41,7 @@
 import LangToggle from '@c/langToggle.vue';
 import ThemeToggle from '@c/themeToggle.vue';
 import LayoutToggle from '@c/layoutToggle.vue';
+import FontSizePicker from '@c/fontSizePicker.vue';
 
 export default {
     name: 'navDrawer',
@@ -47,6 +49,7 @@ export default {
         ThemeToggle,
         LayoutToggle,
         LangToggle,
+        FontSizePicker,
     },
     data: () => ({
         clipped: false,

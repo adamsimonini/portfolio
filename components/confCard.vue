@@ -7,8 +7,12 @@
             <img :src="image" @error="imgPlaceholder" />
         </nuxt-link>
         <div class="conf-dates">
-            <p><b>{{ $t('start') }}</b>: {{startDate}}</p>
-            <p><b>{{ $t('end') }}</b>: {{endDate}}</p>
+            <v-icon>mdi-calendar-month</v-icon>
+            <span><b>{{ $t('start') }}</b>: {{startDate}}</span>
+        </div>
+        <div class="conf-dates">
+            <v-icon>mdi-calendar-month</v-icon>
+            <span><b>{{ $t('end') }}</b>: {{endDate}}</span>
         </div>
         <div class="conf-details">
             <div class="details-item conf-location">
@@ -84,19 +88,20 @@ export default {
     margin: 40px 20px;
 }
 .conf-title {
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-    max-width: 300px;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+.conf-title h3 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
     margin-bottom: 10px;
 }
 .conf-dates {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
-}
-.conf-dates p {
-    width: 50%;
 }
 .conf-details {
     display: flex;

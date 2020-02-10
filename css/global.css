@@ -1,9 +1,9 @@
 :root {
-    --base-font-size: 10px
+    --base-font-size: 16px
 }
 
 html {
-    font-size: var(--base-font-size);
+    font-size: var(--base-font-size) !important;
 }
 
 p {
@@ -14,6 +14,14 @@ span {
     font-size: 1rem;
 }
 
+input {
+    font-size: 1rem !important;
+}
+
+label {
+    font-size: 1rem;
+}
+
 h2 {
     font-size: 2rem;
 }
@@ -21,6 +29,7 @@ h2 {
 h3 {
     font-size: 1.5rem;
 }
+
 
 /* .container{
     font-size: var(--base-font-size)
