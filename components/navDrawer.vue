@@ -6,6 +6,7 @@
       fixed
       :right=right
       app
+      :mobile-break-point=1400
     >
       <v-list
       nav

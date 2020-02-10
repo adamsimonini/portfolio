@@ -34,7 +34,6 @@
 
 <script>
 import NavDrawer from '@c/navDrawer.vue';
-
 export default {
   components: {
     NavDrawer,
@@ -66,6 +65,7 @@ export default {
   },
   created() {
     this.locale = this.$i18n.locale;
+    // this.$setCookie('Theme', {layout: "default", color: "dark"}, 30);
   },
   methods: {
   },

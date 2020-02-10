@@ -30,7 +30,7 @@ import { mapState } from 'vuex'
         layout: this.$store.state.layout,
       }
     },
-    layout: 'default',
+    layout: JSON.parse(localStorage.getItem("appLocalStorage")).layout,
     components: {
       LangToggle,
       ThemeToggle,

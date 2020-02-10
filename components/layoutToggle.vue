@@ -11,7 +11,7 @@
 </template>
 
 <script>
-
+// TODO: address page/language change stutter after switching layout
 export default {
     name: 'layoutToggle',
     data: () => {
@@ -21,12 +21,18 @@ export default {
     },
     methods: {
         flipLayout: function () {
-
         // this functional changes which layout the component is using, as seen in the :root/layout folder
-        let currentLayout = this.$nuxt.$data.layoutName;
-        // either way works, though the 2nd one is harder to understand
-        currentLayout == 'default' ? $nuxt.setLayout('flippedLayout') : $nuxt.setLayout('defaut');
+          let currentLayout = this.$nuxt.$data.layoutName;
+          this.$store.commit('flipLayout', currentLayout);
+          currentLayout == 'default' ? $nuxt.setLayout('rightNavDrawer') : $nuxt.setLayout('defaut');
         }
+    },
+    created() {
+      // Check if there are cookies, and if so set everyhing up so that the truthvalue for the cooke takes precedence
+      if(localStorage.getItem("appLocalStorage")){
+          let currentLayout = JSON.parse(localStorage.getItem("appLocalStorage")).layout;
+          $nuxt.setLayout(currentLayout);
+      }
     },
     components: {
     },

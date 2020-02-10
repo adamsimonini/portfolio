@@ -203,7 +203,7 @@ import moment from 'moment'
     grid-area: image;
     border-radius: 10px;
 }
-@media only screen and (max-width: 1050px) {
+@media only screen and (max-width: 1400px) {
     .conf-card {
         margin: 10% 10%;
         font-size: 25px;
