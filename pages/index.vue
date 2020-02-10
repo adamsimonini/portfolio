@@ -67,7 +67,7 @@ export default {
       title: "PSD Conference Tracker",
     }
   },
-  layout: JSON.parse(localStorage.getItem("appLocalStorage")).layout,
+  layout: localStorage.getItem("appLocalStorage")? JSON.parse(localStorage.getItem("appLocalStorage")).layout : 'default',
   components: {
     LangToggle,
     ThemeToggle,
