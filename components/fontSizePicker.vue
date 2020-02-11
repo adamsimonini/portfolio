@@ -4,11 +4,10 @@
           :items="items"
           label="language"
         ></v-select> -->
-        <p>Font size picker</p>
-        <span>Font size: {{fontSize}}</span>
-        </br>
-        <v-btn @click="fontChange('+')">+</v-btn>
-        <v-btn @click="fontChange('-')">-</v-btn>
+        <span>Font size: {{fontSize}}px</span>
+        <br/>
+        <v-btn @click="fontChange('+')"><b>+</b></v-btn>
+        <v-btn @click="fontChange('-')"><b>-</b></v-btn>
     </div>
 </template>
 
@@ -16,18 +15,41 @@
 export default {
     name: 'fontSizePicker',
     data: () => ({
-        fontSize: 16,
+        fontSize: '',
     }),
+    created() {
+      // Check if there are cookies, and if so set everyhing up so that the truthvalue for the cooke takes precedence
+        if(localStorage.getItem("appLocalStorage")){
+            let root = document.documentElement;
+            let currentSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size').match(/\d+/)[0])
+            if (currentSize > 7 && currentSize < 40){
+                root.style.setProperty('--base-font-size', (JSON.parse(localStorage.getItem("appLocalStorage")).fontSize+ 'px'));
+                this.fontSize = JSON.parse(localStorage.getItem("appLocalStorage")).fontSize;
+            } else {
+                this.fontSize = 18;
+                root.style.setProperty('--base-font-size', "18px")
+            }
+                //   this.fontSize = JSON.parse(localStorage.getItem("appLocalStorage")).fontSize;
+        }
+    },
     methods: {
         fontChange(operator) {
             let root = document.documentElement;
+            let currentSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size').match(/\d+/)[0]);
             if(operator == "+") {
-                root.style.setProperty('--base-font-size', (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size').match(/\d+/)[0])+1)+"px");
+                currentSize++;
+                root.style.setProperty('--base-font-size', (currentSize + 'px'));
+                this.$store.commit('changeFontSize', currentSize);
+                this.fontSize = currentSize;
+                // this.fontSize
             } else {
-                root.style.setProperty('--base-font-size', (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size').match(/\d+/)[0])-1)+"px");
+                currentSize--;
+                root.style.setProperty('--base-font-size', (currentSize + 'px'));
+                this.$store.commit('changeFontSize', currentSize);
+                this.fontSize = currentSize;
             }
-            console.log((parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size').match(/\d+/)[0])+1)+"px");
-            this.fontSize = (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size').match(/\d+/)[0]));
+            // console.log((parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size').match(/\d+/)[0])+1)+"px");
+            // this.fontSize = (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size').match(/\d+/)[0]));
         },
     },
     components: {

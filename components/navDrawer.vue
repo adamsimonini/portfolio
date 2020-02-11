@@ -7,6 +7,7 @@
       :right=right
       app
       :mobile-break-point=1400
+      id="navigation-drawer"
     >
       <v-list
       nav

@@ -84,7 +84,7 @@ export default {
 
 <style scoped>
 .conf-card {
-    max-width: 300px;
+    max-width: 350px;
     margin: 40px 20px;
 }
 .conf-title {
@@ -119,7 +119,7 @@ export default {
     text-align: center;
 }
 .conf-image img {
-    max-width: 300px;
+    max-width: 350px;
     max-height: 200px;
     transition: all .2s ease-in-out;
     border-radius: 10px;
