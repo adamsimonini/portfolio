@@ -1,10 +1,10 @@
 <template>
 <div>
     <div class="conf-card">
-        <img class="conf-image" :src="image" @error="imgPlaceholder" alt="Conference image"/>
+        <img class="conf-image" :src="conferenceDetails.image" @error="imgPlaceholder" alt="Conference image"/>
         <div class="all-conf-info">
             <div class="conf-title">
-                <h2>{{title}}</h2>
+                <h2>{{conferenceDetails.title}}</h2>
             </div>
             <div class="conf-dates">
                 <!-- <span>Start Date</span> -->
@@ -59,11 +59,11 @@
             <div class="conf-details">
                 <div class="details-item conf-location">
                     <v-icon>mdi-map-marker</v-icon>
-                    <span>{{location.city}}, {{location.country}}</span>
+                    <span>{{conferenceDetails.location.city}}, {{conferenceDetails.location.country}}</span>
                 </div>
                 <!-- TODO: Add disabled when no link is provided  -->
                 <div class="details-item conf-website">
-                    <v-btn :href="`//${this.website}`" target="_blank" large>
+                    <v-btn :href="`//${conferenceDetails.website}`" target="_blank" large>
                         <v-icon>mdi-link-variant</v-icon>
                         <span>{{ $t('website')}}</span>
                     </v-btn>
@@ -94,35 +94,52 @@ import moment from 'moment'
     name: 'confFullView',
     data: function () {
       return {
+        selectedConf: 1,
         layout: this.$store.state.layout,
         locale: '',
         date: new Date().toISOString().substr(0, 10),
         picker: {
             start: {
                 menu: false,
-                date: conferences[0].startDate,
+                date: this.startDate,
                 modal: false,
                 menu2: false,
             },
             end: {
                 menu: false,
-                date: conferences[0].endDate,
+                date: this.endDate,
                 modal: false,
                 menu2: false,
             },
+        },
+        conferenceDetails: {
+            title: conferences[this.$store.state.selectedConf].title,
+            image: conferences[this.$store.state.selectedConf].image,
+            // startDate: conferences[this.$store.state.selectedConf].startDate,
+            // endDate: conferences[this.$store.state.selectedConf].endDate,
+            // startDate: , 
+            // endDate: ,
+            location: {
+                city: conferences[this.$store.state.selectedConf].location.city,
+                country: conferences[this.$store.state.selectedConf].location.country,
+            },
+            website: conferences[this.$store.state.selectedConf].website,
+            // deadline: ,
+            // reports: ,
         },
       }
     },
     props: {
         // TODO: can I set default value to trigger when field is left blank? At the moment it never triggers
-        title: {
-            type: String,
-            default: conferences[0].title,
-        },
-        image: {
-            type: String,
-            default: conferences[0].image,
-        },
+        // THIS IS CURRENTLY NOT USED!
+        // title: {
+        //     type: String,
+        //     default: conferences[this.selectedConf].title,
+        // },
+        // image: {
+        //     type: String,
+        //     default: conferences[this.selectedConf].image,
+        // },
         startDate: {
             type: String,
             default: conferences[0].startDate,
@@ -131,19 +148,19 @@ import moment from 'moment'
             type: String,
             default: conferences[0].endDate,
         },
-        location: {
-            type: Object,
-            default: function () { 
-                return {
-                    city: conferences[0].location.city,
-                    country: conferences[0].location.country,
-                }
-            }
-        },
-        website: {
-            type: String,
-            default: conferences[0].website,
-        },
+        // location: {
+        //     type: Object,
+        //     default: function () { 
+        //         return {
+        //             city: conferences[0].location.city,
+        //             country: conferences[0].location.country,
+        //         }
+        //     }
+        // },
+        // website: {
+        //     type: String,
+        //     default: conferences[0].website,
+        // },
         deadline: {
             type: String,
             default: conferences[0].deadline,
@@ -203,7 +220,7 @@ import moment from 'moment'
     grid-area: image;
     border-radius: 10px;
 }
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1430px) {
     .conf-card {
         margin: 10% 10%;
         font-size: 25px;

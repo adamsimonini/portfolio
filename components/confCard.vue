@@ -3,7 +3,7 @@
         <div class="conf-title">
             <h3>{{title}}</h3>
         </div>
-        <nuxt-link class="conf-image" :to="localePath('confFullView')">
+        <nuxt-link class="conf-image" :to="localePath('confFullView')" v-on:click.native="updateConferenceSelection()">
             <img :src="image" @error="imgPlaceholder" />
         </nuxt-link>
         <div class="conf-dates">
@@ -40,6 +40,10 @@ export default {
     }),
     props: {
         // TODO: can I set default value to trigger when field is left blank? At the moment it never triggers
+        cardIndex: {
+            type: Number,
+            default: 0,
+        },
         title: {
             type: String,
             default: "not provided"
@@ -75,6 +79,9 @@ export default {
     methods: {
         imgPlaceholder(e) {
             e.target.src = "/images/no-image-found.png"
+        },
+        updateConferenceSelection() {
+            this.$store.commit('updateConferenceSelection', this.cardIndex);
         }
     },
     components: {

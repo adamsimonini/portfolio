@@ -4,41 +4,29 @@ export const conferences = [
       title: "Archangel Summit 2020",
       image: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F68822197%2F45360628177%2F1%2Foriginal.20190815-220126?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C120%2C1920%2C960&s=e6509fb0cca8e30a4ae749cc1a99fbaa",
       // must be YYYY-MM-DD
-      startDate: "2020-09-18",
-      endDate: "2020-09-19",
+      startDate: "2020-11-18",
+      endDate: "2020-11-19",
       location: {
           city: "Ottawa",
           country: "CA"
       },
       website: "archangelsummit.com/",
-      deadline: "01/31/2020",
+      deadline: "31/08/2020",
       reports: {
         name: "Sarah",
         url: "https://docs.google.com/document/d/1tRbm3gHuXDX_d1xI9TI3ZiPVwYBrRuZ2q7MHE-VVCJ8/edit?usp=sharing",
       }
     },
     {
-      title: "Our Present Future",
-      image: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F77038979%2F184036823647%2F1%2Foriginal.20191016-143013?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2000%2C1000&s=c687c75a58089d8d1b411cc52d961090",
-      startDate: "2020-09-18",
-      endDate: "2020-09-18",
-      location: {
-          city: "Palo Alto",
-          country: "US"
-      },
-      website: "archangelsummit.com/",
-      deadline: "29/02/2020",
-    },
-    {
       title: "An Evening with Eckhart Tolle in Toronto",
       image: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F63007113%2F162678786657%2F1%2Foriginal.20190528-191634?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C13%2C1200%2C600&s=7785a7e83645db2fbe07a8ec4755a31a",
-      startDate: "2020-01-08",
-      endDate: "2020-01-10",
+      startDate: "2020-10-08",
+      endDate: "2020-10-10",
       location: {
         city: "Vancouver",
         country: "CA"
       },
-      website: "archangelsummit.com/",
+      website: "eventbrite.com/e/an-evening-with-eckhart-tolle-in-toronto-tickets-61455587316",
       deadline: "",
     },
     {
@@ -50,7 +38,7 @@ export const conferences = [
           city: "Ottawa",
           country: "CA"
       },
-      website: "archangelsummit.com/",
+      website: "cannexus.ca/",
       deadline: "01/31/2020",
     },
     {
@@ -62,7 +50,7 @@ export const conferences = [
           city: "Palo Alto",
           country: "US"
       },
-      website: "archangelsummit.com/",
+      website: "tedxkanata.com/",
       deadline: "29/02/2020",
     },
     {
@@ -74,7 +62,19 @@ export const conferences = [
         city: "Calgary",
         country: "CA"
       },
-      website: "archangelsummit.com/",
+      website: "naturebasedclimatesolutions.ca",
       deadline: "",
-    }
+    },
+    {
+      title: "Our Present Future",
+      image: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F77038979%2F184036823647%2F1%2Foriginal.20191016-143013?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2000%2C1000&s=c687c75a58089d8d1b411cc52d961090",
+      startDate: "2020-09-18",
+      endDate: "2020-09-18",
+      location: {
+          city: "Palo Alto",
+          country: "US"
+      },
+      website: "ffpu.unipu.hr/past-present-future-2019/about_the_conference",
+      deadline: "29/02/2020",
+    },
 ];

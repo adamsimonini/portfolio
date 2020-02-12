@@ -1,9 +1,5 @@
 <template>
     <div>
-        <!-- <v-select
-          :items="items"
-          label="language"
-        ></v-select> -->
         <span>Font size: {{fontSize}}px</span>
         <br/>
         <v-btn @click="fontChange('+')"><b>+</b></v-btn>
@@ -29,7 +25,7 @@ export default {
                 this.fontSize = 18;
                 root.style.setProperty('--base-font-size', "18px")
             }
-                //   this.fontSize = JSON.parse(localStorage.getItem("appLocalStorage")).fontSize;
+            // this.fontSize = JSON.parse(localStorage.getItem("appLocalStorage")).fontSize;
         }
     },
     methods: {

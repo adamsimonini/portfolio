@@ -14,8 +14,9 @@
     <h2>{{ $t('allConferencesTitle')}}</h2>
     <div class="all-conferneces">
       <ConfCard 
-        v-for="(conf, i) in conferences" 
-        :key="i" 
+        v-for="(conf, i) in conferences"
+        :cardIndex=i
+        :key="conf.title" 
         :image="conf.image"
         :title="conf.title"
         :startDate="conf.startDate"
@@ -67,7 +68,7 @@ export default {
       title: "PSD Conference Tracker",
     }
   },
-  layout: localStorage.getItem("appLocalStorage")? JSON.parse(localStorage.getItem("appLocalStorage")).layout : 'default',
+  layout: localStorage.getItem("appLocalStorage")? JSON.parse(localStorage.getItem("appLocalStorage")).layout : this.$store.state.layout,
   components: {
     LangToggle,
     ThemeToggle,

@@ -1,7 +1,8 @@
 export const state = () => ({
-    layout: 'flippedLayout',
+    layout: 'default',
     darkTheme: true,
     fontSize: '22px',
+    selectedConf: 0,
 });
 
 export const getters = {}
@@ -17,5 +18,8 @@ export const mutations = {
     },
     changeFontSize(state, newSize) {
         state.fontSize = newSize;
-    }
+    },
+    updateConferenceSelection(state, confereceNumber) {
+        state.selectedConf = confereceNumber;
+    },
 };
