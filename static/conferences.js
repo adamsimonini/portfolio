@@ -27,7 +27,7 @@ export const conferences = [
         country: "CA"
       },
       website: "eventbrite.com/e/an-evening-with-eckhart-tolle-in-toronto-tickets-61455587316",
-      deadline: "",
+      deadline: "2020-5-15",
     },
     {
       title: "Cannexus 20",
@@ -51,7 +51,7 @@ export const conferences = [
           country: "US"
       },
       website: "tedxkanata.com/",
-      deadline: "29/02/2020",
+      deadline: "2020-9-15",
     },
     {
       title: "Nature-Based Climate Solutions Summit",
@@ -63,7 +63,7 @@ export const conferences = [
         country: "CA"
       },
       website: "naturebasedclimatesolutions.ca",
-      deadline: "",
+      deadline: "2020-10-01",
     },
     {
       title: "Our Present Future",

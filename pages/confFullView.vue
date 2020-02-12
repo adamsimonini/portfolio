@@ -70,11 +70,11 @@
                 </div>
             </div>
             <div class="conf-deadline">
-                <span>{{ $t("deadline") }}: {{deadline}}</span>
+                <span>{{ $t("deadline") }}: {{conferenceDetails.deadline}}</span>
             </div>
-            <div class="download" v-if="reports.name">
+            <div class="download" v-if="conferenceDetails.reports.name">
                 <v-btn href="https://docs.google.com/document/d/1tRbm3gHuXDX_d1xI9TI3ZiPVwYBrRuZ2q7MHE-VVCJ8/edit?usp=sharing" target="_blank" large>
-                    <span>View {{reports.name}}'s Report</span>
+                    <span>View {{conferenceDetails.reports.name}}'s Report</span>
                     <v-icon>mdi-file-document</v-icon>
                 </v-btn>
             </div>
@@ -124,8 +124,13 @@ import moment from 'moment'
                 country: conferences[this.$store.state.selectedConf].location.country,
             },
             website: conferences[this.$store.state.selectedConf].website,
-            // deadline: ,
-            // reports: ,
+            deadline: conferences[this.$store.state.selectedConf].deadline,
+            reports: function () { 
+                return {
+                    name: conferences[0].reports.name,
+                    url: conferences[this.$store.state.selectedConf].reports.url,
+                }
+            }
         },
       }
     },
@@ -161,19 +166,19 @@ import moment from 'moment'
         //     type: String,
         //     default: conferences[0].website,
         // },
-        deadline: {
-            type: String,
-            default: conferences[0].deadline,
-        },
-        reports: {
-            type: Object,
-            default: function () { 
-                return {
-                    name: conferences[0].reports.name,
-                    url: conferences[0].reports.url,
-                }
-            }
-        }
+        // deadline: {
+        //     type: String,
+        //     default: conferences[0].deadline,
+        // },
+        // reports: {
+        //     type: Object,
+        //     default: function () { 
+        //         return {
+        //             name: conferences[0].reports.name,
+        //             url: conferences[0].reports.url,
+        //         }
+        //     }
+        // }
     },
     layout: 'default',
     components: {
@@ -200,6 +205,11 @@ import moment from 'moment'
     font-size: 25px;
     display: flex;
     margin-top: 10%;
+}
+.conf-title h2 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .all-conf-info {
     display: grid;

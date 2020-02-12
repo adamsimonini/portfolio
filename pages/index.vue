@@ -68,7 +68,7 @@ export default {
       title: "PSD Conference Tracker",
     }
   },
-  layout: localStorage.getItem("appLocalStorage")? JSON.parse(localStorage.getItem("appLocalStorage")).layout : this.$store.state.layout,
+  layout: 'default',
   components: {
     LangToggle,
     ThemeToggle,
@@ -101,9 +101,10 @@ export default {
 }
 .all-conferneces {
   display: flex;
+  justify-content: center;
   align-content: space-evenly;
   flex-wrap: wrap;
-  margin: 0 5%;
+  margin: 0 5% 0 5%;
 }
 h2 {
   margin: 0 6%;
