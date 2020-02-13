@@ -4,7 +4,7 @@ export const conferences = [
       title: "Archangel Summit 2020",
       image: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F68822197%2F45360628177%2F1%2Foriginal.20190815-220126?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C120%2C1920%2C960&s=e6509fb0cca8e30a4ae749cc1a99fbaa",
       // must be YYYY-MM-DD
-      startDate: "2020-11-18",
+      startDate: "2020-10-18",
       endDate: "2020-11-19",
       location: {
           city: "Ottawa",
@@ -52,8 +52,8 @@ export const conferences = [
     {
       title: "TEDxKanata",
       image: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F82962997%2F136856915032%2F1%2Foriginal.20191128-205332?w=1080&auto=format%2Ccompress&q=75&sharp=10&rect=226%2C0%2C2672%2C1336&s=e325637c32282b3b869a8e75305965c2",
-      startDate: "2020-09-18",
-      endDate: "2020-09-18",
+      startDate: "2021-09-18",
+      endDate: "2021-09-18",
       location: {
           city: "Palo Alto",
           country: "US"
@@ -68,8 +68,8 @@ export const conferences = [
     {
       title: "Nature-Based Climate Solutions Summit",
       image: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F83785253%2F270664435685%2F1%2Foriginal.20191206-165559?w=1080&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=abe2aca336d1f100ed203e819b831b00",
-      startDate: "2020-11-18",
-      endDate: "2020-11-22",
+      startDate: "2021-11-18",
+      endDate: "2021-11-22",
       location: {
         city: "Calgary",
         country: "CA"
@@ -84,8 +84,8 @@ export const conferences = [
     {
       title: "Our Present Future",
       image: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F77038979%2F184036823647%2F1%2Foriginal.20191016-143013?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2000%2C1000&s=c687c75a58089d8d1b411cc52d961090",
-      startDate: "2020-09-18",
-      endDate: "2020-09-18",
+      startDate: "2020-012-18",
+      endDate: "2020-12-18",
       location: {
           city: "Palo Alto",
           country: "US"

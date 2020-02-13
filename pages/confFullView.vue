@@ -108,13 +108,13 @@ import moment from 'moment'
         picker: {
             start: {
                 menu: false,
-                date: this.startDate,
+                date: conferences[this.$store.state.selectedConf].startDate,
                 modal: false,
                 menu2: false,
             },
             end: {
                 menu: false,
-                date: this.endDate,
+                date: conferences[this.$store.state.selectedConf].endDate,
                 modal: false,
                 menu2: false,
             },
@@ -140,14 +140,14 @@ import moment from 'moment'
       }
     },
     props: {
-        startDate: {
-            type: String,
-            default: conferences[0].startDate,
-        },
-        endDate: {
-            type: String,
-            default: conferences[0].endDate,
-        },
+        // startDate: {
+        //     type: String,
+        //     default: conferences[0].startDate,
+        // },
+        // endDate: {
+        //     type: String,
+        //     default: conferences[0].endDate,
+        // },
     },
     layout: 'default',
     components: {
