@@ -37,15 +37,12 @@ export default {
                 root.style.setProperty('--base-font-size', (currentSize + 'px'));
                 this.$store.commit('changeFontSize', currentSize);
                 this.fontSize = currentSize;
-                // this.fontSize
             } else {
                 currentSize--;
                 root.style.setProperty('--base-font-size', (currentSize + 'px'));
                 this.$store.commit('changeFontSize', currentSize);
                 this.fontSize = currentSize;
             }
-            // console.log((parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size').match(/\d+/)[0])+1)+"px");
-            // this.fontSize = (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size').match(/\d+/)[0]));
         },
     },
     components: {

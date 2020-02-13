@@ -31,7 +31,6 @@ import { mapState } from 'vuex'
       }
     },
     layout: 'default',
-    // localStorage.getItem("appLocalStorage")? JSON.parse(localStorage.getItem("appLocalStorage")).layout : this.$store.state.layout,
     components: {
       LangToggle,
       ThemeToggle,
@@ -40,14 +39,10 @@ import { mapState } from 'vuex'
     },
     methods: {
       flipLayout: function () {
-        // console.log(getCookie("i18n_redirected"));
-        console.log(this.$getCookie("i18n_redirected"));
-
         // this functional changes which layout the component is using, as seen in the :root/layout folder
         let currentLayout = this.$nuxt.$data.layoutName;
         // either way works, though the 2nd one is harder to understand
         currentLayout == 'default' ? $nuxt.setLayout('flippedLayout') : $nuxt.setLayout('defaut');
-        // $nuxt.setLayout(currentLayout = currentLayout == 'default' ? 'flippedLayout' : 'default')
       }
     }
   }

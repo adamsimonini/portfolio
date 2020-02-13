@@ -21,7 +21,7 @@
             </div>
             <!-- TODO: Add disabled when no link is provided  -->
             <div class="details-item conf-website">
-                <v-btn :href="`//${this.website}`" target="_blank">
+                <v-btn :href="`//${this.website}`" target="_blank" :disabled=disabled>
                     <v-icon>mdi-link-variant</v-icon>
                     <span>{{ $t('website')}}</span>
                 </v-btn>
@@ -37,6 +37,7 @@
 export default {
     name: 'confCard',
     data: () => ({
+        disabled: false,
     }),
     props: {
         // TODO: can I set default value to trigger when field is left blank? At the moment it never triggers
@@ -86,6 +87,9 @@ export default {
     },
     components: {
     },
+    created() {
+        this.website == '' ? this.disabled = true : this.disabled = false;
+    }
 }
 </script>
 

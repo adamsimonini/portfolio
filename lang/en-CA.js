@@ -2,6 +2,7 @@
 
 export default {
   allConferencesTitle: "All conferences",
+  back: "Back",
   close: "Close",
   conferenceTracker: "PSD Conference Tracker",
   darkMode: "Dark Mode",

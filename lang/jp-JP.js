@@ -2,6 +2,7 @@
 
 export default {
   allConferencesTitle: "このアプリケーションへようこそ！",
+  back: "帰る",
   close: "閉じる",
   conferenceTracker: "会議トラッカー",
   darkMode: "ダークモード",

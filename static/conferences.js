@@ -14,7 +14,7 @@ export const conferences = [
       deadline: "31/08/2020",
       reports: {
         name: "Sarah",
-        url: "https://docs.google.com/document/d/1tRbm3gHuXDX_d1xI9TI3ZiPVwYBrRuZ2q7MHE-VVCJ8/edit?usp=sharing",
+        url: "https://drive.google.com/open?id=1tRbm3gHuXDX_d1xI9TI3ZiPVwYBrRuZ2q7MHE-VVCJ8",
       }
     },
     {
@@ -28,6 +28,10 @@ export const conferences = [
       },
       website: "eventbrite.com/e/an-evening-with-eckhart-tolle-in-toronto-tickets-61455587316",
       deadline: "2020-5-15",
+      reports: {
+        name: "Derek",
+        url: "https://drive.google.com/open?id=1j4kbjWy5mtRcHwYtjmwJl3axvXkxbtRtHtbTIl-4ZUs",
+      }
     },
     {
       title: "Cannexus 20",
@@ -40,6 +44,10 @@ export const conferences = [
       },
       website: "cannexus.ca/",
       deadline: "01/31/2020",
+      reports: {
+        name: "Jennifer",
+        url: "https://drive.google.com/open?id=1E2QnyBMNjlyWE3cNAcfB4cpKXSTOVpSFiPtimXieUJk",
+      }
     },
     {
       title: "TEDxKanata",
@@ -52,6 +60,10 @@ export const conferences = [
       },
       website: "tedxkanata.com/",
       deadline: "2020-9-15",
+      reports: {
+        name: "Vlad",
+        url: "https://drive.google.com/open?id=1O15yvF4vvwnH87L-e0cH_Gq44DIKNgud73WbDA3csls",
+      }
     },
     {
       title: "Nature-Based Climate Solutions Summit",
@@ -64,6 +76,10 @@ export const conferences = [
       },
       website: "naturebasedclimatesolutions.ca",
       deadline: "2020-10-01",
+      reports: {
+        name: "Rick",
+        url: "https://docs.google.com/document/d/1tRbm3gHuXDX_d1xI9TI3ZiPVwYBrRuZ2q7MHE-VVCJ8/edit?usp=sharing",
+      }
     },
     {
       title: "Our Present Future",
@@ -74,7 +90,11 @@ export const conferences = [
           city: "Palo Alto",
           country: "US"
       },
-      website: "ffpu.unipu.hr/past-present-future-2019/about_the_conference",
+      website: "",
       deadline: "29/02/2020",
+      reports: {
+        name: "Morty",
+        url: "https://drive.google.com/open?id=1wyLXvGYM9HXT429ZXFB9EqZSBppM625figQ2QZHgXA4",
+      }
     },
 ];

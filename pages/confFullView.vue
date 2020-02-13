@@ -63,7 +63,7 @@
                 </div>
                 <!-- TODO: Add disabled when no link is provided  -->
                 <div class="details-item conf-website">
-                    <v-btn :href="`//${conferenceDetails.website}`" target="_blank" large>
+                    <v-btn :href="`//${conferenceDetails.website}`" target="_blank" large :disabled="disabled">
                         <v-icon>mdi-link-variant</v-icon>
                         <span>{{ $t('website')}}</span>
                     </v-btn>
@@ -73,12 +73,18 @@
                 <span>{{ $t("deadline") }}: {{conferenceDetails.deadline}}</span>
             </div>
             <div class="download" v-if="conferenceDetails.reports.name">
-                <v-btn href="https://docs.google.com/document/d/1tRbm3gHuXDX_d1xI9TI3ZiPVwYBrRuZ2q7MHE-VVCJ8/edit?usp=sharing" target="_blank" large>
+                <v-btn :href="conferenceDetails.reports.url" target="_blank" large>
                     <span>View {{conferenceDetails.reports.name}}'s Report</span>
                     <v-icon>mdi-file-document</v-icon>
                 </v-btn>
             </div>
         </div>
+    </div>
+    <div class="back-button">
+        <v-btn large @click="$router.go(-1)">
+            <v-icon>mdi-arrow-left-circle</v-icon>
+            <span>{{ $t('back')}}</span>
+        </v-btn>
     </div>
 </div>
 </template>
@@ -95,6 +101,7 @@ import moment from 'moment'
     data: function () {
       return {
         selectedConf: 1,
+        disabled: false,
         layout: this.$store.state.layout,
         locale: '',
         date: new Date().toISOString().substr(0, 10),
@@ -125,26 +132,14 @@ import moment from 'moment'
             },
             website: conferences[this.$store.state.selectedConf].website,
             deadline: conferences[this.$store.state.selectedConf].deadline,
-            reports: function () { 
-                return {
-                    name: conferences[0].reports.name,
-                    url: conferences[this.$store.state.selectedConf].reports.url,
-                }
-            }
+            reports: {
+                name: conferences[this.$store.state.selectedConf].reports.name,
+                url: conferences[this.$store.state.selectedConf].reports.url,
+            },
         },
       }
     },
     props: {
-        // TODO: can I set default value to trigger when field is left blank? At the moment it never triggers
-        // THIS IS CURRENTLY NOT USED!
-        // title: {
-        //     type: String,
-        //     default: conferences[this.selectedConf].title,
-        // },
-        // image: {
-        //     type: String,
-        //     default: conferences[this.selectedConf].image,
-        // },
         startDate: {
             type: String,
             default: conferences[0].startDate,
@@ -153,32 +148,6 @@ import moment from 'moment'
             type: String,
             default: conferences[0].endDate,
         },
-        // location: {
-        //     type: Object,
-        //     default: function () { 
-        //         return {
-        //             city: conferences[0].location.city,
-        //             country: conferences[0].location.country,
-        //         }
-        //     }
-        // },
-        // website: {
-        //     type: String,
-        //     default: conferences[0].website,
-        // },
-        // deadline: {
-        //     type: String,
-        //     default: conferences[0].deadline,
-        // },
-        // reports: {
-        //     type: Object,
-        //     default: function () { 
-        //         return {
-        //             name: conferences[0].reports.name,
-        //             url: conferences[0].reports.url,
-        //         }
-        //     }
-        // }
     },
     layout: 'default',
     components: {
@@ -196,6 +165,7 @@ import moment from 'moment'
     },
     created() {
         this.locale = this.$i18n.locale;
+        this.conferenceDetails.website == '' ? this.disabled = true : this.disabled = false;
     },
   }
 </script>
@@ -204,7 +174,7 @@ import moment from 'moment'
 .conf-card {
     font-size: 25px;
     display: flex;
-    margin-top: 10%;
+    margin-top: 50px;
 }
 .conf-title h2 {
     text-overflow: ellipsis;
@@ -232,7 +202,7 @@ import moment from 'moment'
 }
 @media only screen and (max-width: 1430px) {
     .conf-card {
-        margin: 10% 10%;
+        margin: 0;
         font-size: 25px;
         display: flex;
         justify-content: center;
@@ -262,6 +232,9 @@ import moment from 'moment'
     .conf-dates div{
         width: 100%;
     }
+}
+@media only screen and (max-width: 1430px) {
+
 }
 .conf-title {
     overflow:hidden;
@@ -315,5 +288,9 @@ a {
     grid-area: download;
     margin: 20px 0;
     width: 100%;
+}
+.back-button {
+    margin-top: 20px;
+    text-align: center;
 }
 </style>

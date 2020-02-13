@@ -37,9 +37,6 @@ import ThemeToggle from '@c/themeToggle.vue'
 import ConfCard from '@c/confCard.vue'
 import { mapState } from 'vuex'
 import {conferences} from '@@/static/conferences.js'
-// console.log(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size'));
-// document.documentElement.style.setProperty('--base-font-size', '20');
-// console.log(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size'));
 
 export default {
   name: 'Index',
@@ -65,7 +62,6 @@ export default {
           path: '/inspire'
         },
       ],
-      title: "PSD Conference Tracker",
     }
   },
   layout: 'default',
@@ -78,20 +74,16 @@ export default {
   },
   created () {
     this.conferences = conferences;
-    console.log(this.$getCookie("i18n_redirected"));
   },
   methods: {
     flipLayout: function () {
-      // console.log(getCookie("i18n_redirected"));
-      // console.log(this.$getCookie("i18n_redirected"));
-
       // this functional changes which layout the component is using, as seen in the :root/layout folder
       let currentLayout = this.$nuxt.$data.layoutName;
       // either way works, though the 2nd one is harder to understand
       currentLayout == 'default' ? $nuxt.setLayout('flippedLayout') : $nuxt.setLayout('defaut');
       // $nuxt.setLayout(currentLayout = currentLayout == 'default' ? 'flippedLayout' : 'default')
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -100,11 +92,11 @@ export default {
   max-width: 1250px;
 }
 .all-conferneces {
+  max-width: 1555px;
   display: flex;
   justify-content: center;
   align-content: space-evenly;
   flex-wrap: wrap;
-  margin: 0 5% 0 5%;
 }
 h2 {
   margin: 0 6%;

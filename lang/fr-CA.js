@@ -2,6 +2,7 @@
 
 export default {
   allConferencesTitle: "Bienvenue dans cette application!",
+  back: "Retour",
   close: "Fermer",
   conferenceTracker: "Suivi de conférence PSD",
   darkMode: "Mode sombre",
