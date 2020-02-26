@@ -130,10 +130,10 @@ export default {
     text-align: center;
 }
 .conf-image img {
-    max-width: 350px;
-    max-height: 200px;
+    width: 350px;
     transition: all .2s ease-in-out;
     border-radius: 10px;
+    height: 175px;
 }
 .conf-image img:hover {
     transform: scale(0.95); 
