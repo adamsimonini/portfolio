@@ -4,7 +4,7 @@ export default {
   allConferencesTitle: "All conferences",
   back: "Back",
   close: "Close",
-  conferenceTracker: "PSD Conference Tracker",
+  conferenceTracker: "Partnerships & Strategy Division - Conference Tracker",
   darkMode: "Dark Mode",
   deadline: "Deadline to express interest",
   end: "End",
