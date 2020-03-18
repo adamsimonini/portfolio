@@ -16,7 +16,7 @@
       <ConfCard 
         v-for="(conf, i) in conferences"
         :cardIndex=i
-        :key="conf.title" 
+        :key="conf.title + i" 
         :image="conf.image"
         :title="conf.title"
         :startDate="conf.startDate"
