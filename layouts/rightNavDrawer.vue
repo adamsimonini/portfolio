@@ -1,4 +1,4 @@
-<!-- Applicable when compoent's layout value = the name of this file -->
+<!-- Applicable when compoent's layout value = the name of this file. Adam has retired this page: 10/08/2020 -->
 
 <template>
   <v-app dark>

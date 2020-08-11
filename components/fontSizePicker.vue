@@ -32,12 +32,12 @@ export default {
         fontChange(operator) {
             let root = document.documentElement;
             let currentSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-font-size').match(/\d+/)[0]);
-            if(operator == "+") {
+            if(operator == "+" && root.style.getPropertyValue('--base-font-size') != "26px") {
                 currentSize++;
                 root.style.setProperty('--base-font-size', (currentSize + 'px'));
                 this.$store.commit('changeFontSize', currentSize);
                 this.fontSize = currentSize;
-            } else {
+            } else if (operator == "-" && root.style.getPropertyValue('--base-font-size') != "10px") {
                 currentSize--;
                 root.style.setProperty('--base-font-size', (currentSize + 'px'));
                 this.$store.commit('changeFontSize', currentSize);

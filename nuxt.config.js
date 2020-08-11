@@ -131,6 +131,7 @@ export default {
       // these are custom paths, where @@ is the root directory, as defined by Nuxt under the hood
       config.resolve.alias['@c'] = '@@/components';
       config.resolve.alias['@l'] = '@@/layouts';
+      config.resolve.alias['@p'] = '@@/plugins';
     }
   }
 }

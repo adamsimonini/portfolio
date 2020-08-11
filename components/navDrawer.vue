@@ -31,7 +31,7 @@
           </nuxt-link>
         </v-list-item-group>
         <ThemeToggle />
-        <LayoutToggle />
+        <!-- <LayoutToggle /> -->
         <LangToggle />
         <FontSizePicker />
       </v-list>

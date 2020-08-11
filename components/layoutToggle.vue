@@ -2,7 +2,6 @@
     <v-list-item @click="flipLayout()">
       <v-list-item-action>
         <v-icon>{{`mdi-page-layout-sidebar-${this.layout}`}}</v-icon>
-        <!-- <v-icon>mdi-page-layout-sidebar-right</v-icon> -->
       </v-list-item-action>
       <v-list-item-content>
         {{ $t('flipLayout') }}
