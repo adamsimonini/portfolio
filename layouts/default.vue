@@ -4,15 +4,17 @@
   <v-app dark>
     <NavDrawer :navOptions="navOptions" />
     <v-app-bar :clipped-left="clipped" fixed app>
-      <!-- <v-app-bar-nav-icon @click.stop="navOptions.drawer = !navOptions.drawer" /> -->
-      <v-btn icon @click.stop="navOptions.mini = !navOptions.mini">
+      <v-app-bar-nav-icon @click.stop="navOptions.drawer = !navOptions.drawer" />
+      <!-- <v-btn icon @click.stop="navOptions.mini = !navOptions.mini">
         <v-icon>mdi-{{ `chevron-${navOptions.mini ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
+      </v-btn>-->
       <v-toolbar-title v-text="this.$t('conferenceTracker')" />
       <v-spacer />
-      <nuxt-link v-if="!user" to='login'><v-btn>login</v-btn></nuxt-link>
-      <div v-if="user" class="avatar-bar">
-        <v-toolbar-title v-text="user" />
+      <nuxt-link v-if="!userName" to="loginPage">
+        <v-btn>login</v-btn>
+      </nuxt-link>
+      <div v-if="userName" class="avatar-bar">
+        <v-toolbar-title v-text="userName" />
         <v-avatar color="indigo" size="50">
           <span class="white--text headline initials">{{this.initials}}</span>
         </v-avatar>
@@ -29,6 +31,7 @@
 <script>
 import NavDrawer from '@c/navDrawer.vue'
 import db from '@p/firebase.js'
+import firebase from 'firebase'
 
 export default {
   components: {
@@ -37,7 +40,8 @@ export default {
   data() {
     return {
       dialog: false,
-      user: null,
+      user: {},
+      userName: null,
       initials: null,
       locale: '',
       clipped: false,
@@ -65,18 +69,32 @@ export default {
     this.locale = this.$i18n.locale
   },
   mounted() {
-    // db.collection('users')
-    //   .doc('r7h17ifadmaJpjHLAmi6')
-    //   .get()
-    //   .then(snapshot => {
-    //     this.user = `${snapshot.data().firstName} ${snapshot.data().lastName}`
-    //     const names = this.user.split(' ');
-    //     this.initials = names.map(name => {
-    //       return name[0];
-    //     }).join('');
-    //   })
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.user = user
+        console.log(this.user)
+        this.updateUser()
+        this.setUserNames()
+      }
+    })
   },
-  methods: {}
+  methods: {
+    updateUser() {
+      // this is to replicate the user data without using this.user, which is mutatable via soruces beyond the store
+      const newUser = JSON.parse(JSON.stringify(this.user))
+      this.$store.commit('updateUser', newUser)
+    },
+    setUserNames() {
+      db.collection('users')
+        .doc(this.user.uid)
+        .get()
+        .then(snapshot => {
+          this. userName = `${snapshot.data().firstName} ${snapshot.data().lastName}`
+          this.initials = `${snapshot.data().firstName[0]}${snapshot.data().lastName[0]}`
+          console.log(names)
+        })
+    }
+  }
 }
 </script>
 
@@ -101,6 +119,6 @@ export default {
   padding: 24px;
 }
 .v-application a {
-    color: transparent;
+  color: transparent;
 }
 </style>
