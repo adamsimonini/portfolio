@@ -10,15 +10,16 @@
       </v-btn>-->
       <v-toolbar-title v-text="this.$t('conferenceTracker')" />
       <v-spacer />
-      <nuxt-link v-if="!userName" to="loginPage">
-        <v-btn>login</v-btn>
-      </nuxt-link>
       <div v-if="userName" class="avatar-bar">
         <v-toolbar-title v-text="userName" />
-        <v-avatar color="indigo" size="50">
+        <!-- <v-avatar color="indigo" size="50">
           <span class="white--text headline initials">{{this.initials}}</span>
-        </v-avatar>
+        </v-avatar>-->
+      <v-divider class="pr-3 mr-3" vertical="true"></v-divider>
       </div>
+      <!-- <nuxt-link :to="this.user ? 'inspire' : 'loginPage'"> -->
+        <v-btn @click="user ? logout() : goLogin()">{{user ? "logout" : "login"}}</v-btn>
+      <!-- </nuxt-link> -->
     </v-app-bar>
     <v-content>
       <v-container id="container">
@@ -89,10 +90,26 @@ export default {
         .doc(this.user.uid)
         .get()
         .then(snapshot => {
-          this. userName = `${snapshot.data().firstName} ${snapshot.data().lastName}`
-          this.initials = `${snapshot.data().firstName[0]}${snapshot.data().lastName[0]}`
-          console.log(names)
+          this.userName = `${snapshot.data().firstName} ${
+            snapshot.data().lastName
+          }`
+          this.initials = `${snapshot.data().firstName[0]}${
+            snapshot.data().lastName[0]
+          }`
         })
+    },
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.user = null
+          this.userName = null
+          this.$router.push('')
+        })
+    },
+    goLogin() {
+      this.$router.push('loginPage')
     }
   }
 }
@@ -110,7 +127,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
 }
 .avatar-bar .initials {
   font-size: 20px !important;
