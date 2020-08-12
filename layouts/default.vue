@@ -18,7 +18,7 @@
       <v-divider class="pr-3 mr-3" vertical="true"></v-divider>
       </div>
       <!-- <nuxt-link :to="this.user ? 'inspire' : 'loginPage'"> -->
-        <v-btn @click="user ? logout() : goLogin()">{{user ? "logout" : "login"}}</v-btn>
+        <v-btn @click="user ? logout() : goToLogin()">{{user ? "logout" : "sign in"}}</v-btn>
       <!-- </nuxt-link> -->
     </v-app-bar>
     <v-content>
@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       dialog: false,
-      user: {},
+      user: null,
       userName: null,
       initials: null,
       locale: '',
@@ -73,7 +73,6 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.user = user
-        console.log(this.user)
         this.updateUser()
         this.setUserNames()
       }
@@ -90,12 +89,13 @@ export default {
         .doc(this.user.uid)
         .get()
         .then(snapshot => {
-          this.userName = `${snapshot.data().firstName} ${
-            snapshot.data().lastName
-          }`
-          this.initials = `${snapshot.data().firstName[0]}${
-            snapshot.data().lastName[0]
-          }`
+          this.userName = user.displayName
+          // this.userName = `${snapshot.data().firstName} ${
+          //   snapshot.data().lastName
+          // }`
+          // this.initials = `${snapshot.data().firstName[0]}${
+          //   snapshot.data().lastName[0]
+          // }`
         })
     },
     logout() {
@@ -106,9 +106,10 @@ export default {
           this.user = null
           this.userName = null
           this.$router.push('')
+          this.$store.commit('updateUser', null)
         })
     },
-    goLogin() {
+    goToLogin() {
       this.$router.push('loginPage')
     }
   }

@@ -2,7 +2,7 @@
   <ValidationObserver class="form-box" ref="observer" v-slot="{ validate, reset }">
     <v-form @submit.prevent="submit">
       <v-textarea
-        v-if="error"
+        v-if="errorMessage"
         readonly
         error-messages="Please try again"
         label="Error"
@@ -10,6 +10,15 @@
         v-model="errorMessage"
         height="100"
       ></v-textarea>
+      <ValidationProvider v-slot="{ errors }" name="name" rules="required">
+        <v-text-field
+          prepend-icon="mdi-account"
+          v-model="name"
+          :error-messages="errors"
+          label="First & Last Name"
+          required
+        ></v-text-field>
+      </ValidationProvider>
       <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
         <v-text-field
           prepend-icon="mdi-email"
@@ -19,23 +28,37 @@
           required
         ></v-text-field>
       </ValidationProvider>
-      <ValidationProvider v-slot="{ errors }" name="password" rules="required">
+      <!-- PASSWORD ONE -->
+      <ValidationProvider v-slot="{ errors }" name="passwordOne" rules="required">
         <v-text-field
           prepend-icon="mdi-lock"
-          v-model="password"
+          v-model="passwordOne"
           :error-messages="errors"
-          label="password"
-          :type="showPass ? 'text' : 'password'"
+          label="Password"
+          :type="showPassOne ? 'text' : 'password'"
           required
-          @click:append="showPass = !showPass"
-          :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="showPassOne = !showPassOne"
+          :append-icon="showPassOne ? 'mdi-eye' : 'mdi-eye-off'"
         ></v-text-field>
-        <v-btn class="mr-4" type="submit">sign in</v-btn>
       </ValidationProvider>
+      <!-- PASSWORD TWO -->
+      <ValidationProvider v-slot="{ errors }" name="passwordTwo" rules="required">
+        <v-text-field
+          prepend-icon="mdi-lock"
+          v-model="passwordTwo"
+          :error-messages="errors"
+          label="Repeat Password"
+          :type="showPassTwo ? 'text' : 'password'"
+          required
+          @click:append="showPassTwo = !showPassTwo"
+          :append-icon="showPassTwo ? 'mdi-eye' : 'mdi-eye-off'"
+        ></v-text-field>
+      </ValidationProvider>
+      <v-btn :disabled="errorMessage" class="mr-4" type="submit">Register</v-btn>
     </v-form>
     <span>
-      Don't have an account?
-      <v-btn @click="goToRegistration">Register Here</v-btn>
+      Already have an account?
+      <v-btn @click="goToLogin">Sign In Here</v-btn>
     </span>
   </ValidationObserver>
 </template>
@@ -54,7 +77,7 @@ setInteractionMode('eager')
 
 extend('required', {
   ...required,
-  message: 'Password cannot be empty'
+  message: 'This field cannot be empty'
 })
 
 extend('email', {
@@ -68,13 +91,15 @@ export default {
     ValidationObserver
   },
   data: () => ({
-    email: '',
-    password: '',
-    error: false,
-    errorMessage: '',
-    showPass: false
+    name: null,
+    email: null,
+    erro: null,
+    passwordOne: null,
+    passwordTwo: null,
+    errorMessage: null,
+    showPassOne: false,
+    showPassTwo: false
   }),
-
   methods: {
     submit() {
       this.$refs.observer.validate()
@@ -90,11 +115,23 @@ export default {
         })
         .catch(error => {
           this.errorMessage = error.message
-          this.error = true
         })
     },
-    goToRegistration() {
-      this.$router.push('registrationPage')
+    goToLogin() {
+      this.$router.push('loginPage')
+    }
+  },
+  watch: {
+    passwordTwo: () => {
+      if (
+        this.passwordOne !== '' &&
+        this.passwordTwo !== '' &&
+        this.passwordTwo !== this.passwordOne
+      ) {
+        this.errorMessage = 'Passwords must match'
+      } else {
+        this.errorMessage = null
+      }
     }
   }
 }
