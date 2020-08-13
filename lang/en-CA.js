@@ -7,6 +7,7 @@ export default {
   conferenceTracker: "Partnerships & Strategy Division - Conference Tracker",
   darkMode: "Dark Mode",
   deadline: "Deadline to express interest",
+  deleteAccount: "Delete Account (this cannot be undone)",
   end: "End",
   flipLayout: 'Flip layout',
   fourzerofour: "404 error: page not found",

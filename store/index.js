@@ -3,10 +3,15 @@ export const state = () => ({
     darkTheme: true,
     fontSize: '22px',
     selectedConf: 0,
-    user: {},
+    user: null,
 });
 
-export const getters = {}
+export const getters = {
+    getUser: state => {
+        return state.user
+    }
+}
+
 
 export const actions = {};
 

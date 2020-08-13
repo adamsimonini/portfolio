@@ -7,6 +7,7 @@ export default {
   conferenceTracker: "Suivi de conférence PSD",
   darkMode: "Mode sombre",
   deadline: "date limite",
+  deleteAccount: "Supprimer le compte (ça ne peut pas être annulé)",
   end: "fin",
   flipLayout: 'Flip layout',
   fourzerofour: "Erreur 404: page introuvable",

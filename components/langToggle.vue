@@ -22,7 +22,6 @@ export default {
     toggleLanguage: function() {
       const newLocale = this.$i18n.getLocaleCookie() == 'en' ? 'fr' : 'en'
       this.language = newLocale == 'en' ? 'English' : 'Française'
-      console.log(this.$i18n.getLocaleCookie())
       return newLocale
     }
   },

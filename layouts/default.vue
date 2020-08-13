@@ -10,12 +10,12 @@
       </v-btn>-->
       <v-toolbar-title v-text="this.$t('conferenceTracker')" />
       <v-spacer />
-      <div :v-if=userName class="avatar-bar">
+      <div :v-if="userName" class="avatar-bar">
         <v-toolbar-title v-text="userName" />
         <!-- <v-avatar color="indigo" size="50">
           <span class="white--text headline initials">{{this.initials}}</span>
         </v-avatar>-->
-        <v-divider class="pr-3 mr-3" :vertical=true></v-divider>
+        <v-divider class="pr-3 mr-3" :vertical="true"></v-divider>
       </div>
       <!-- <nuxt-link :to="this.user ? 'inspire' : 'loginPage'"> -->
       <v-btn @click="user ? logout() : goToLogin()">{{user ? "logout" : "sign in"}}</v-btn>
@@ -31,7 +31,6 @@
 
 <script>
 import NavDrawer from '@c/navDrawer.vue'
-import db from '@p/firebase.js'
 import firebase from 'firebase'
 
 export default {
@@ -75,6 +74,9 @@ export default {
         this.user = user
         this.userName = this.user.displayName
         this.updateUser()
+      } else {
+        this.userName = null
+        this.$store.commit('updateUser', null)
       }
     })
   },
@@ -93,6 +95,7 @@ export default {
           this.userName = null
           this.$router.push('')
           this.$store.commit('updateUser', null)
+          window.location.reload()
         })
     },
     goToLogin() {
