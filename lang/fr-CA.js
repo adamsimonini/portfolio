@@ -13,6 +13,7 @@ export default {
   home: "Accueil",
   inspire: "Ceci est une citation inspirante!",
   lightMode: "Mode d'éclairage",
+  settings: "Paramètres",
   start: "début",
   website: "site Internet",
 }

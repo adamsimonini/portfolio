@@ -13,6 +13,7 @@ export default {
   home: "Home",
   inspire: "This is an inspiring quote!",
   lightMode: "Light Mode",
+  settings: "Settings",
   start: "Start",
   website: "Website",
 }

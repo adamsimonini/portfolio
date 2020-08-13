@@ -10,15 +10,15 @@
       </v-btn>-->
       <v-toolbar-title v-text="this.$t('conferenceTracker')" />
       <v-spacer />
-      <div v-if="userName" class="avatar-bar">
+      <div :v-if=userName class="avatar-bar">
         <v-toolbar-title v-text="userName" />
         <!-- <v-avatar color="indigo" size="50">
           <span class="white--text headline initials">{{this.initials}}</span>
         </v-avatar>-->
-      <v-divider class="pr-3 mr-3" vertical="true"></v-divider>
+        <v-divider class="pr-3 mr-3" :vertical=true></v-divider>
       </div>
       <!-- <nuxt-link :to="this.user ? 'inspire' : 'loginPage'"> -->
-        <v-btn @click="user ? logout() : goToLogin()">{{user ? "logout" : "sign in"}}</v-btn>
+      <v-btn @click="user ? logout() : goToLogin()">{{user ? "logout" : "sign in"}}</v-btn>
       <!-- </nuxt-link> -->
     </v-app-bar>
     <v-content>
@@ -73,8 +73,8 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.user = user
+        this.userName = this.user.displayName
         this.updateUser()
-        this.setUserNames()
       }
     })
   },
@@ -83,20 +83,6 @@ export default {
       // this is to replicate the user data without using this.user, which is mutatable via soruces beyond the store
       const newUser = JSON.parse(JSON.stringify(this.user))
       this.$store.commit('updateUser', newUser)
-    },
-    setUserNames() {
-      db.collection('users')
-        .doc(this.user.uid)
-        .get()
-        .then(snapshot => {
-          this.userName = user.displayName
-          // this.userName = `${snapshot.data().firstName} ${
-          //   snapshot.data().lastName
-          // }`
-          // this.initials = `${snapshot.data().firstName[0]}${
-          //   snapshot.data().lastName[0]
-          // }`
-        })
     },
     logout() {
       firebase

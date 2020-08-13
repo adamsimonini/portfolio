@@ -17,6 +17,7 @@
           :error-messages="errors"
           label="E-mail"
           required
+          @focus="reset()"
         ></v-text-field>
       </ValidationProvider>
       <ValidationProvider v-slot="{ errors }" name="password" rules="required">
@@ -29,6 +30,7 @@
           required
           @click:append="showPass = !showPass"
           :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+          @focus="reset()"
         ></v-text-field>
         <v-btn class="mr-4" type="submit">sign in</v-btn>
       </ValidationProvider>
@@ -63,6 +65,7 @@ extend('email', {
 })
 
 export default {
+  name: 'Login',
   components: {
     ValidationProvider,
     ValidationObserver
@@ -95,6 +98,9 @@ export default {
     },
     goToRegistration() {
       this.$router.push('registrationPage')
+    },
+    reset() {
+      this.error = false
     }
   }
 }

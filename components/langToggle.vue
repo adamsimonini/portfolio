@@ -1,27 +1,31 @@
 <template>
-    <div>
-        <!-- <v-select
-          :items="items"
-          label="language"
-        ></v-select> -->
-        <nuxt-link :to="switchLocalePath('en')">English</nuxt-link>
-        <nuxt-link :to="switchLocalePath('fr')">Français</nuxt-link>
-        <nuxt-link :to="switchLocalePath('jp')">日本語</nuxt-link>
-    </div>
+  <nuxt-link class="nuxt-link" :to="switchLocalePath(toggleLanguage())">
+    <!-- empty on click is sufficient to apply vuetify theme styles applied to this item -->
+    <v-list-item @click="()=>{}">
+      <v-list-item-action>
+        <v-icon>mdi-translate</v-icon>
+      </v-list-item-action>
+      <v-list-item-content>{{language}}</v-list-item-content>
+    </v-list-item>
+  </nuxt-link>
 </template>
 
 <script>
 export default {
-    name: 'langToggle',
-    data: () => ({
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-    }),
-    methods: {
-        matchCookieWithStore: function() {
-            // this.$store.langCookie.mutations('matchCookie');
-        }
-    },
-    components: {
-    },
+  name: 'langToggle',
+  data: () => {
+    return {
+      language: 'English'
+    }
+  },
+  methods: {
+    toggleLanguage: function() {
+      const newLocale = this.$i18n.getLocaleCookie() == 'en' ? 'fr' : 'en'
+      this.language = newLocale == 'en' ? 'English' : 'Française'
+      console.log(this.$i18n.getLocaleCookie())
+      return newLocale
+    }
+  },
+  components: {}
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <v-list-item v-on:click="themeToggle()">
+    <v-list-item @click="themeToggle()">
       <v-list-item-action>
         <v-icon>{{icon}}</v-icon>
       </v-list-item-action>
