@@ -18,7 +18,7 @@
         <v-divider class="pr-3 mr-3" :vertical="true"></v-divider>
       </div>
       <!-- <nuxt-link :to="this.user ? 'inspire' : 'loginPage'"> -->
-      <v-btn @click="user ? logout() : goToLogin()">{{user ? "logout" : "sign in"}}</v-btn>
+      <v-btn color="primary" @click="user ? logout() : goToLogin()">{{user ? "logout" : "sign in"}}</v-btn>
       <!-- </nuxt-link> -->
     </v-app-bar>
     <v-content>
@@ -72,7 +72,7 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.user = user
-        this.userName = this.user.displayName
+        this.userName = user.displayName
         this.updateUser()
       } else {
         this.userName = null

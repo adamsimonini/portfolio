@@ -70,7 +70,7 @@
           :append-icon="showPassTwo ? 'mdi-eye' : 'mdi-eye-off'"
         ></v-text-field>
       </ValidationProvider>
-      <v-btn :disabled=error class="mr-4" type="submit">Register</v-btn>
+      <v-btn color="primary" class="mr-4" type="submit">Register</v-btn>
     </v-form>
     <span>
       Already have an account?
@@ -102,7 +102,7 @@ extend('email', {
 })
 
 export default {
-  name: "Registration",
+  name: 'Registration',
   components: {
     ValidationProvider,
     ValidationObserver
@@ -116,13 +116,13 @@ export default {
       'Prevention Guidelines',
       'Social Determinants of Health'
     ],
-    email: null,
-    passwordOne: null,
-    passwordTwo: null,
+    email: '',
+    passwordOne: '',
+    passwordTwo: '',
     showPassOne: false,
     showPassTwo: false,
     errorMessage: null,
-    error: false,
+    error: false
   }),
   methods: {
     submit() {

@@ -32,7 +32,7 @@
           :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
           @focus="reset()"
         ></v-text-field>
-        <v-btn class="mr-4" type="submit">sign in</v-btn>
+        <v-btn color="primary" class="mr-4" type="submit">sign in</v-btn>
       </ValidationProvider>
     </v-form>
     <span>
