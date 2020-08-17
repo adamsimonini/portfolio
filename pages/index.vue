@@ -47,6 +47,7 @@ export default {
       .firestore()
       .collection('conferences')
       .onSnapshot(data => {
+        this.conferences = []
         data.forEach(conference => {
           this.conferences.push({
             id: conference.id,
