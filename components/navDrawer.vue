@@ -21,6 +21,14 @@
         </nuxt-link>
         <ThemeToggle />
         <LangToggle />
+        <nuxt-link class="nuxt-link" :to="localePath('addConference')">
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-clipboard-plus</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>{{ $t("addConference") }}</v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
         <nuxt-link class="nuxt-link" :to="localePath('settings')">
           <v-list-item>
             <v-list-item-icon>

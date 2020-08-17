@@ -1,6 +1,7 @@
 // totality of French translations
 
 export default {
+  addConference: "Ajouter une conférence",
   allConferencesTitle: "Bienvenue dans cette application!",
   back: "Retour",
   close: "Fermer",

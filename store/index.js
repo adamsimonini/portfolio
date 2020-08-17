@@ -2,13 +2,17 @@ export const state = () => ({
     layout: 'default',
     darkTheme: true,
     fontSize: '22px',
-    selectedConf: 0,
+    selectedConf: '',
     user: null,
 });
 
 export const getters = {
     getUser: state => {
         return state.user
+    },
+    getConferenceName: state => {
+        console.log(state.selectedConf)
+        return state.selectedConf
     }
 }
 
@@ -28,7 +32,7 @@ export const mutations = {
     updateConferenceSelection(state, confereceNumber) {
         state.selectedConf = confereceNumber;
     },
-    updateUser(state, user){
+    updateUser(state, user) {
         state.user = user;
     }
 };

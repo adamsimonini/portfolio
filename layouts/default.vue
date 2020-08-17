@@ -79,6 +79,18 @@ export default {
         this.$store.commit('updateUser', null)
       }
     })
+    // delete collection from DB
+    // firebase
+    //   .firestore()
+    //   .collection('conferences')
+    //   .doc('asd')
+    //   .delete()
+    //   .then(function() {
+    //     console.log('Document successfully deleted!')
+    //   })
+    //   .catch(function(error) {
+    //     console.error('Error removing document: ', error)
+    //   })
   },
   methods: {
     updateUser() {

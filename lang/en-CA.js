@@ -1,7 +1,8 @@
 // totality of English translations
 
 export default {
-  allConferencesTitle: "All conferences",
+  addConference: "Add Conference",
+  allConferencesTitle: "All Conferences",
   back: "Back",
   close: "Close",
   conferenceTracker: "Partnerships & Strategy Division - Conference Tracker",
