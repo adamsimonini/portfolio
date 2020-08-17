@@ -1,12 +1,7 @@
 <template>
   <div>
-    <div class="conf-card">
-      <img
-        class="conf-image"
-        :src="this.image"
-        @error="imgPlaceholder"
-        alt="Conference image"
-      />
+    <div v-if=loaded class="conf-card">
+      <img class="conf-image" :src="this.image" @error="imgPlaceholder" alt="Conference image" />
       <div class="all-conf-info">
         <div class="conf-title">
           <h2>{{this.name}}</h2>
@@ -99,10 +94,10 @@
             <span>View {{reportName}}'s Report</span>
             <v-icon>mdi-file-document</v-icon>
           </v-btn>
-        </div> -->
+        </div>-->
       </div>
     </div>
-    <div class="back-button">
+    <div v-if=loaded class="back-button">
       <v-btn large @click="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
         <span>{{ $t('back')}}</span>
@@ -125,6 +120,7 @@ export default {
       disabled: false,
       layout: this.$store.state.layout,
       locale: '',
+      loaded: false,
       date: new Date().toISOString().substr(0, 10),
       picker: {
         start: {
@@ -166,21 +162,27 @@ export default {
       return this.date ? moment(date).format('dddd, MMMM Do YYYY') : ''
     }
   },
-  created() {},
+  created() {
+    const storage = firebase.storage()
+    const storageRef = storage.ref()
+    const imageRef = storageRef.child('conference-splash/mextropoli2020.jpg')
+    imageRef.getDownloadURL().then(url => {
+      this.image = url
+    })
+  },
   mounted() {
     const conferenceName = this.$store.getters.getConferenceName.toString()
-    // console.log(`Name = ${conferenceName}`)
-    var docRef = firebase
+    const docRef = firebase
       .firestore()
       .collection('conferences')
-      .doc(conferenceName)
-
+      // .doc('123')
+    .doc(conferenceName)
+    // after finding the conference by name, populate this component with its relevant data
     docRef
       .get()
       .then(doc => {
         if (doc.exists) {
           const data = doc.data()
-          console.log(data)
           this.name = data.name
           this.website = data.website
           this.city = data.city
@@ -188,8 +190,9 @@ export default {
           this.picker.start.date = data.startDate
           this.picker.end.date = data.endDate
           this.deadline = data.deadline
-          this.reportName = 'Sally Wilkonson', 
+          this.reportName = 'Sally Wilkonson'
           this.reportUrl = 'google.ca'
+          this.loaded = true
         } else {
           // doc.data() will be undefined in this case
           console.log('No such document!')
