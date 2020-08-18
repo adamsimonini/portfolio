@@ -9,7 +9,7 @@
           v-for="(conf) in conferences"
           :id="conf.id"
           :key="conf.title"
-          :image="conf.image"
+          :imageRef="conf.imageRef"
           :name="conf.name"
           :startDate="conf.startDate"
           :endDate="conf.endDate"
@@ -17,7 +17,6 @@
           :deadline="conf.deadline"
         />
       </div>
-
     </v-flex>
   </v-layout>
 </template>
@@ -32,7 +31,8 @@ export default {
   name: 'index',
   data: function() {
     return {
-      conferences: []
+      conferences: [],
+      imageUrl: []
     }
   },
   layout: 'default',
@@ -41,29 +41,29 @@ export default {
   },
   computed: {},
   created() {
-  },
-  mounted() {
-    firebase
-      .firestore()
-      .collection('conferences')
-      .onSnapshot(data => {
-        this.conferences = []
-        data.forEach(conference => {
-          this.conferences.push({
-            id: conference.id,
-            name: conference.data().name,
-            location: {
-              city: conference.data().city,
-              country: conference.data().country
-            },
-            website: conference.data().website,
-            startDate: conference.data().startDate,
-            endDate: conference.data().endDate,
-            deadline: conference.data().deadline
-          })
+    this.conferences = []
+    const conferences = async () => {
+      const conferenceRef = firebase.firestore().collection('conferences')
+      const allConferences = await conferenceRef.get()
+      for (const conference of allConferences.docs) {
+        this.conferences.push({
+          id: conference.id,
+          name: conference.data().name,
+          location: {
+            city: conference.data().city,
+            country: conference.data().country
+          },
+          website: conference.data().website,
+          startDate: conference.data().startDate,
+          endDate: conference.data().endDate,
+          deadline: conference.data().deadline,
+          imageRef: conference.data().imageRef
         })
-      })
+      }
+    }
+    conferences()
   },
+  mounted() {},
   methods: {}
 }
 </script>

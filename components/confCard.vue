@@ -8,7 +8,7 @@
       :to="localePath('confFullView')"
       v-on:click.native="updateConferenceSelection()"
     >
-      <img :src="image" @error="imgPlaceholder" />
+      <img v-if="imageUrl" :src="imageUrl" @error="imgPlaceholder" />
     </nuxt-link>
     <div class="conf-dates">
       <v-icon>mdi-calendar-month</v-icon>
@@ -30,7 +30,7 @@
         <span>{{location.city}}, {{location.country}}</span>
       </div>
       <!-- TODO: Add disabled when no link is provided  -->
-      <div class="details-item conf-website">
+      <div v-if="website" class="details-item conf-website">
         <v-btn :href="`//${this.website}`" target="_blank" :disabled="disabled">
           <v-icon>mdi-link-variant</v-icon>
           <span>{{ $t('website')}}</span>
@@ -42,10 +42,13 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'confCard',
   data: () => ({
-    disabled: false
+    disabled: false,
+    imageUrl: ''
   }),
   props: {
     // TODO: can I set default value to trigger when field is left blank? At the moment it never triggers
@@ -57,9 +60,9 @@ export default {
       type: String,
       default: 'not provided'
     },
-    image: {
+    imageRef: {
       type: String,
-      default: '/images/no-image-found.png'
+      default: ''
     },
     startDate: {
       type: String,
@@ -78,7 +81,7 @@ export default {
     },
     website: {
       type: String,
-      default: 'not provided'
+      default: ''
     },
     deadline: {
       type: String,
@@ -90,13 +93,43 @@ export default {
       e.target.src = '/images/no-image-found.png'
     },
     updateConferenceSelection() {
-      this.$store.commit('updateConferenceSelection', this.id)
+      const conferenceData = {
+        id: this.$props.id,
+        name: this.$props.name,
+        imageRef: this.$props.imageRef,
+        startDate: this.$props.startDate,
+        endDate: this.$props.endDate,
+        location: this.$props.location,
+        website: this.$props.website,
+        deadline: this.$props.deadline
+      }
+      this.$store.commit('updateConferenceSelection', conferenceData)
+    },
+    getImageUrl() {
+      const storage = firebase.storage()
+      try {
+        const storageRef = storage.ref(this.$props.imageRef)
+        const imageUrl = storageRef.getDownloadURL().then(url => {
+          console.log(url)
+          this.imageUrl = url
+        })
+      } catch (err) {
+        console.log(err)
+        const storageRef = storage
+          .ref('no-image-found.png')
+          .getDownloadURL()
+          .then(function(url) {
+            this.imageUrl = url
+          })
+      }
     }
   },
   components: {},
   created() {
+    this.getImageUrl()
     this.website == '' ? (this.disabled = true) : (this.disabled = false)
-  }
+  },
+  mounted() {}
 }
 </script>
 

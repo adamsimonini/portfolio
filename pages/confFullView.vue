@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if=loaded class="conf-card">
-      <img class="conf-image" :src="this.image" @error="imgPlaceholder" alt="Conference image" />
+    <div v-if="loaded && imageUrl" class="conf-card">
+      <img class="conf-image" :src="imageUrl" @error="imgPlaceholder" alt="Conference image" />
       <div class="all-conf-info">
         <div class="conf-title">
           <h2>{{this.name}}</h2>
@@ -97,7 +97,7 @@
         </div>-->
       </div>
     </div>
-    <div v-if=loaded class="back-button">
+    <div v-if="loaded" class="back-button">
       <v-btn large @click="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
         <span>{{ $t('back')}}</span>
@@ -137,10 +137,8 @@ export default {
         }
       },
       name: null,
-      image: {
-        type: String,
-        default: '/images/no-image-found.png'
-      },
+      imageRef: null,
+      imageUrl: null,
       city: null,
       country: null,
       website: null,
@@ -149,10 +147,7 @@ export default {
       reportUrl: 'google.ca'
     }
   },
-  props: {},
   layout: 'default',
-  components: {},
-  computed: {},
   methods: {
     imgPlaceholder(e) {
       e.target.src = '/images/no-image-found.png'
@@ -160,47 +155,42 @@ export default {
     formatDate(date) {
       moment.locale(this.locale)
       return this.date ? moment(date).format('dddd, MMMM Do YYYY') : ''
+    },
+    getImageUrl() {
+      const storage = firebase.storage()
+      try {
+        const storageRef = storage.ref(this.imageRef)
+        const imageUrl = storageRef.getDownloadURL().then(url => {
+          console.log(url)
+          this.imageUrl = url
+        })
+      } catch (err) {
+        console.log(err)
+        const storageRef = storage
+          .ref('no-image-found.png')
+          .getDownloadURL()
+          .then(function(url) {
+            this.imageUrl = url
+          })
+      }
     }
   },
-  created() {
-    const storage = firebase.storage()
-    const storageRef = storage.ref()
-    const imageRef = storageRef.child('conference-splash/mextropoli2020.jpg')
-    imageRef.getDownloadURL().then(url => {
-      this.image = url
-    })
-  },
+  created() {},
   mounted() {
-    const conferenceName = this.$store.getters.getConferenceName.toString()
-    const docRef = firebase
-      .firestore()
-      .collection('conferences')
-      // .doc('123')
-    .doc(conferenceName)
-    // after finding the conference by name, populate this component with its relevant data
-    docRef
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          const data = doc.data()
-          this.name = data.name
-          this.website = data.website
-          this.city = data.city
-          this.country = data.country
-          this.picker.start.date = data.startDate
-          this.picker.end.date = data.endDate
-          this.deadline = data.deadline
-          this.reportName = 'Sally Wilkonson'
-          this.reportUrl = 'google.ca'
-          this.loaded = true
-        } else {
-          // doc.data() will be undefined in this case
-          console.log('No such document!')
-        }
-      })
-      .catch(function(error) {
-        console.log('Error getting document:', error)
-      })
+    const selectedConf = this.$store.getters.getSelectedConf
+    console.log(selectedConf)
+    this.id = selectedConf.id
+    this.name = selectedConf.name
+    this.deadline = selectedConf.deadline
+    this.picker.end.date = selectedConf.endDate
+    this.imageRef = selectedConf.imageRef
+    this.city = selectedConf.location.city
+    this.country = selectedConf.location.country
+    this.picker.start.date = selectedConf.startDate
+    this.website = selectedConf.website
+
+    this.getImageUrl()
+    this.loaded = true
   }
 }
 </script>

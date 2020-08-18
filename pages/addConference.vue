@@ -13,7 +13,15 @@
         value="Success! Your conference has been added to the database."
       >
         <template slot="append">
-          <v-btn id="success-button" fab height="20" width="20" color="rgba(34, 139, 34, 1)" flat @click="close()">
+          <v-btn
+            id="success-button"
+            fab
+            height="20"
+            width="20"
+            color="rgba(34, 139, 34, 1)"
+            flat
+            @click="close()"
+          >
             <v-icon>mdi-close-box</v-icon>
           </v-btn>
         </template>
@@ -155,7 +163,7 @@
               </v-menu>
             </v-col>
           </v-row>
-          <ValidationProvider v-slot="{ errors }" name="file" rules="required|email">
+          <ValidationProvider v-slot="{ errors }" name="file" rules="required">
             <v-file-input
               :rules="imageRules"
               required
@@ -163,6 +171,7 @@
               accept="image/png, image/jpeg, image/bmp"
               placeholder="Add an image"
               prepend-icon="mdi-camera"
+              v-model="imageFile"
             ></v-file-input>
           </ValidationProvider>
           <v-btn color="primary" class="mr-4" type="addConference">Add Conference</v-btn>
@@ -203,6 +212,7 @@ export default {
     startDate: new Date().toISOString().substr(0, 10),
     endDate: new Date().toISOString().substr(0, 10),
     deadline: new Date().toISOString().substr(0, 10),
+    imageFile: null,
     startMenu: false,
     endMenu: false,
     deadlineMenu: null,
@@ -218,6 +228,7 @@ export default {
   }),
   methods: {
     addConference: function() {
+      // check validation
       this.$refs.observer.validate()
       const confInfo = {
         name: this.name,
@@ -226,16 +237,30 @@ export default {
         website: this.website,
         startDate: this.startDate,
         endDate: this.endDate,
-        deadline: this.deadline
+        deadline: this.deadline,
+        image: this.imageFile
       }
       if (
         !this.errorMessage &&
         confInfo.name &&
         confInfo.city &&
         confInfo.country &&
-        confInfo.website
+        confInfo.website &&
+        confInfo.image
       ) {
         try {
+          // create a storage reference
+          var newConfImageRef = firebase
+            .storage()
+            .ref()
+            .child(`conferences/${confInfo.name}-${confInfo.startDate}`)
+
+          var newConfImage = this.imageFile
+          // upload the image file
+          newConfImageRef.put(newConfImage).then(function(snapshot) {
+            console.log('Uploaded a blob or file!')
+          })
+          // push conference data to conferences
           firebase
             .firestore()
             .collection('conferences')
@@ -248,7 +273,9 @@ export default {
               startDate: confInfo.startDate,
               endDate: confInfo.endDate,
               deadline: confInfo.deadline,
-              timeAdded: firebase.firestore.FieldValue.serverTimestamp()
+              timeAdded: firebase.firestore.FieldValue.serverTimestamp(),
+              // add the reference for the stored image to the document 
+              imageRef: newConfImageRef.fullPath
             })
             // the callback below only works with an arrow function, as it causes Vue to make "this" refer to the component instance
             .then(() => {
@@ -258,14 +285,14 @@ export default {
               console.error('Error writing document: ', error)
             })
         } catch (err) {
-          this.errorMessage = err
+          this.errorMessage = err.message
         }
       }
     },
     reset() {
-      alert('test')
       this.error = false
       this.errorMessage = null
+      this.success = false
     },
     close() {
       this.success = false
@@ -287,10 +314,10 @@ form {
   width: 100%;
   max-width: 500px;
 }
-#success{
+#success {
   color: white;
 }
-#success-button{
+#success-button {
   color: white;
 }
 </style>

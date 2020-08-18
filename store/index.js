@@ -2,7 +2,7 @@ export const state = () => ({
     layout: 'default',
     darkTheme: true,
     fontSize: '22px',
-    selectedConf: '',
+    selectedConf: {},
     user: null,
 });
 
@@ -10,8 +10,7 @@ export const getters = {
     getUser: state => {
         return state.user
     },
-    getConferenceName: state => {
-        console.log(state.selectedConf)
+    getSelectedConf: state => {
         return state.selectedConf
     }
 }
@@ -29,8 +28,8 @@ export const mutations = {
     changeFontSize(state, newSize) {
         state.fontSize = newSize;
     },
-    updateConferenceSelection(state, confereceNumber) {
-        state.selectedConf = confereceNumber;
+    updateConferenceSelection(state, conference) {
+        state.selectedConf = conference;
     },
     updateUser(state, user) {
         state.user = user;
