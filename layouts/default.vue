@@ -1,4 +1,8 @@
-<!-- When the 'layout' key is not specified in a page's export default, then this layout will automatically be used-->
+<!-- 
+When the 'layout' key is not specified in a page's export default, then this layout will automatically be used.
+This is the highest level document, which loads the navitation elements (i.e., NavDrawer, app-bar, and nuxt)
+The nuxt component renders all the individual pages, which can be found in 'root/pages'
+-->
 
 <template>
   <v-app dark>
@@ -140,7 +144,7 @@ export default {
   text-decoration: none;
 }
 #container {
-  max-width: 80%;
+  max-width: 100%;
 }
 .avatar-bar {
   display: flex;

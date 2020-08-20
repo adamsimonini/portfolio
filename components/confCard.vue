@@ -5,7 +5,7 @@
     </div>
     <nuxt-link
       class="conf-image"
-      :to="localePath('confFullView')"
+      :to="localePath('singleConf')"
       v-on:click.native="updateConferenceSelection()"
     >
       <img v-if="imageUrl" :src="imageUrl" @error="imgPlaceholder" />
@@ -38,6 +38,19 @@
       </div>
     </div>
     <div class="deadline">{{ $t("deadline") }}: {{deadline}}</div>
+    <v-divider class="mx-4"></v-divider>
+    <div v-if="isAdmin" class="deletion">
+      <v-btn
+        @click="deleteConference()"
+        small
+        :color="canDelete ? 'error' : 'primary'"
+        :disabled="canDelete ? false : true"
+      >
+        <v-icon>{{canDelete ? "mdi-delete" : "mdi-delete-outline"}}</v-icon>
+        {{ $t("delete") }}
+      </v-btn>
+      <v-switch v-model="canDelete" label></v-switch>
+    </div>
   </div>
 </template>
 
@@ -48,7 +61,9 @@ export default {
   name: 'confCard',
   data: () => ({
     disabled: false,
-    imageUrl: ''
+    imageUrl: '',
+    canDelete: false,
+    isAdmin: false
   }),
   props: {
     // TODO: can I set default value to trigger when field is left blank? At the moment it never triggers
@@ -88,6 +103,33 @@ export default {
       default: 'not provided'
     }
   },
+  computed: {
+    userId() {
+      if (this.$store.state.user) {
+        return this.$store.state.user.uid
+      }
+      return false
+    }
+  },
+  watch: {
+    userId: function() {
+      console.log('within userId watcher')
+      const userRef = firebase
+        .firestore()
+        .collection('users')
+        .doc(this.userId)
+
+      userRef.get().then(doc => {
+        if (doc.exists) {
+          console.log(`conf card isAdmin: ${doc.data().isAdmin}`)
+          const isAdmin = doc.data().isAdmin
+          this.isAdmin = isAdmin
+        } else {
+          console.log('No user: user ID is invalid')
+        }
+      })
+    }
+  },
   methods: {
     imgPlaceholder(e) {
       e.target.src = '/images/no-image-found.png'
@@ -122,6 +164,20 @@ export default {
             this.imageUrl = url
           })
       }
+    },
+    deleteConference() {
+      const conferenceRef = firebase
+        .firestore()
+        .collection('conferences')
+        .doc(this.id)
+        .delete()
+        .then(() => {
+          alert(`${this.name} has been deleted`)
+          window.location.reload()
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   components: {},
@@ -129,7 +185,23 @@ export default {
     this.getImageUrl()
     this.website == '' ? (this.disabled = true) : (this.disabled = false)
   },
-  mounted() {}
+  mounted() {
+    // preliminary check for if user is an admin
+    if (this.userId) {
+      const userRef = firebase
+        .firestore()
+        .collection('users')
+        .doc(this.userId)
+
+      userRef.get().then(doc => {
+        if (doc.exists) {
+          this.isAdmin = doc.data().isAdmin
+        } else {
+          console.log('No user: user ID is invalid')
+        }
+      })
+    }
+  }
 }
 </script>
 
@@ -187,5 +259,11 @@ a {
   justify-content: flex-start;
   align-items: center;
   max-height: 60px;
+}
+.deletion {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

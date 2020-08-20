@@ -98,7 +98,7 @@
       </div>
     </div>
     <div v-if="loaded && imageUrl" class="back-button">
-      <v-btn large @click="$router.go(-1)">
+      <v-btn large @click="$router.push('/')">
         <v-icon>mdi-arrow-left-circle</v-icon>
         <span>{{ $t('back')}}</span>
       </v-btn>
@@ -114,7 +114,7 @@ import firebase from 'firebase'
 import moment from 'moment'
 
 export default {
-  name: 'confFullView',
+  name: 'singleConf',
   data: function() {
     return {
       disabled: false,
@@ -174,7 +174,20 @@ export default {
       }
     }
   },
-  created() {},
+  computed: {
+    locale() {
+      // cookies are leveraged for locale in order to persist beyond browser sessions
+      const value = `; ${document.cookie}`
+      const parts = value.split(`; i18n_redirected=`)
+      if (parts.length === 2)
+        return parts
+          .pop()
+          .split(';')
+          .shift()
+      console.log('There was an error accessing the locale cookie. Reverint to English')
+      return 'en'
+    }
+  },
   mounted() {
     const selectedConf = this.$store.getters.getSelectedConf
     console.log(selectedConf)

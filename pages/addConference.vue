@@ -279,7 +279,12 @@ export default {
             })
             // the callback below only works with an arrow function, as it causes Vue to make "this" refer to the component instance
             .then(() => {
-              this.success = true
+              this.success = true,
+              this.name = null,
+              this.city = null,
+              this.country = null,
+              this.website = null,
+              this.imageFile = null
             })
             .catch(function(error) {
               console.error('Error writing document: ', error)

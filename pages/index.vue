@@ -1,6 +1,9 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
+  <v-layout column justify-center align-center class="column">
+    <!-- <div v-if="!loaded">
+      <v-progress-circular :size="100" color="primary" indeterminate class="loader"></v-progress-circular>
+    </div> -->
+    <v-flex xs12 sm8 md6 v-if="loaded">
       <!-- <LangToggle />
       <nuxt-link :to="localePath('inspire')">inspire</nuxt-link>-->
       <h2 class="text-center">{{ $t('allConferencesTitle')}}</h2>
@@ -32,7 +35,8 @@ export default {
   data: function() {
     return {
       conferences: [],
-      imageUrl: []
+      imageUrl: [],
+      loaded: false
     }
   },
   layout: 'default',
@@ -60,6 +64,7 @@ export default {
           imageRef: conference.data().imageRef
         })
       }
+      this.loaded = true
     }
     conferences()
   },
@@ -69,8 +74,13 @@ export default {
 </script>
 
 <style scoped>
+.column {
+  height: 100%;
+}
+
 .container {
   max-width: 1250px;
+  display: flex;
 }
 .all-conferneces {
   max-width: 1555px;
@@ -81,6 +91,17 @@ export default {
 }
 h2 {
   margin: 0 6%;
+}
+
+.loader-box {
+  position: absolute;
+  top: 40%;
+  height: 100px;
+  right: 50%;
+}
+.loader {
+  margin: auto;
+  height: 100%;
 }
 @media only screen and (max-width: 1400px) {
   .all-conferneces {

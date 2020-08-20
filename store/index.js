@@ -12,7 +12,7 @@ export const getters = {
     },
     getSelectedConf: state => {
         return state.selectedConf
-    }
+    },
 }
 
 

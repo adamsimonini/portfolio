@@ -48,7 +48,6 @@ import LangToggle from '@c/langToggle.vue'
 import ThemeToggle from '@c/themeToggle.vue'
 import LayoutToggle from '@c/layoutToggle.vue'
 import firebase from 'firebase'
-import { mapState } from 'vuex'
 
 export default {
   name: 'navDrawer',
@@ -84,30 +83,6 @@ export default {
       }
       return false
     }
-    // mapState(['user'])
-    // isAdmin() {
-    //   console.log('app local storage:')
-    //   console.log(JSON.parse(localStorage.getItem('appLocalStorage')).user.uid)
-
-    //   const uid = JSON.parse(localStorage.getItem('appLocalStorage')).user.uid
-
-    //   const userRef = firebase
-    //     .firestore()
-    //     .collection('users')
-    //     .doc(uid)
-
-    //   userRef.get().then(doc => {
-    //     if (doc.exists) {
-    //       console.log(doc.data().isAdmin)
-    //       const adminCheck = doc.data().isAdmin
-    //       return adminCheck
-    //     } else {
-    //       console.log('No user: user ID is invalid')
-    //     }
-    //   })
-
-    //   // return this.$store.getter.getSUser
-    // }
   },
   methods: {},
   watch: {
@@ -119,7 +94,6 @@ export default {
 
       userRef.get().then(doc => {
         if (doc.exists) {
-          console.log(doc.data().isAdmin)
           const isAdmin = doc.data().isAdmin
           this.isAdmin = isAdmin
         } else {
