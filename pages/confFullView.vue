@@ -97,7 +97,7 @@
         </div>-->
       </div>
     </div>
-    <div v-if="loaded" class="back-button">
+    <div v-if="loaded && imageUrl" class="back-button">
       <v-btn large @click="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
         <span>{{ $t('back')}}</span>
@@ -119,7 +119,6 @@ export default {
     return {
       disabled: false,
       layout: this.$store.state.layout,
-      locale: '',
       loaded: false,
       date: new Date().toISOString().substr(0, 10),
       picker: {

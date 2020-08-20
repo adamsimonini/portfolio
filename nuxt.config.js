@@ -69,10 +69,6 @@ export default {
         name: "français"
       
       },
-      {
-        code: 'jp',
-        name: "日本語"
-      },
     ],
     defaultLocale: "en",
     defaultLocaleRouteNameSuffix: "prefix_and_default",

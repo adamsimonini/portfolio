@@ -11,7 +11,7 @@
   >
     <v-list nav>
       <v-list-item-group>
-        <nuxt-link class="nuxt-link" :to="localePath('index')">
+        <nuxt-link class="nuxt-link" :to="localePath('/')">
           <v-list-item>
             <v-list-item-icon>
               <v-icon>mdi-apps</v-icon>
@@ -19,9 +19,7 @@
             <v-list-item-content>{{ $t("home") }}</v-list-item-content>
           </v-list-item>
         </nuxt-link>
-        <ThemeToggle />
-        <LangToggle />
-        <nuxt-link class="nuxt-link" :to="localePath('addConference')">
+        <nuxt-link v-if="userId && isAdmin" class="nuxt-link" :to="localePath('addConference')">
           <v-list-item>
             <v-list-item-icon>
               <v-icon>mdi-clipboard-plus</v-icon>
@@ -29,6 +27,8 @@
             <v-list-item-content>{{ $t("addConference") }}</v-list-item-content>
           </v-list-item>
         </nuxt-link>
+        <ThemeToggle />
+        <LangToggle />
         <nuxt-link class="nuxt-link" :to="localePath('settings')">
           <v-list-item>
             <v-list-item-icon>
@@ -47,6 +47,8 @@
 import LangToggle from '@c/langToggle.vue'
 import ThemeToggle from '@c/themeToggle.vue'
 import LayoutToggle from '@c/layoutToggle.vue'
+import firebase from 'firebase'
+import { mapState } from 'vuex'
 
 export default {
   name: 'navDrawer',
@@ -57,7 +59,8 @@ export default {
   },
   data: () => ({
     clipped: false,
-    fixed: false
+    fixed: false,
+    isAdmin: false
   }),
   props: {
     right: {
@@ -74,7 +77,60 @@ export default {
       }
     }
   },
-  methods: {}
+  computed: {
+    userId() {
+      if (this.$store.state.user) {
+        return this.$store.state.user.uid
+      }
+      return false
+    }
+    // mapState(['user'])
+    // isAdmin() {
+    //   console.log('app local storage:')
+    //   console.log(JSON.parse(localStorage.getItem('appLocalStorage')).user.uid)
+
+    //   const uid = JSON.parse(localStorage.getItem('appLocalStorage')).user.uid
+
+    //   const userRef = firebase
+    //     .firestore()
+    //     .collection('users')
+    //     .doc(uid)
+
+    //   userRef.get().then(doc => {
+    //     if (doc.exists) {
+    //       console.log(doc.data().isAdmin)
+    //       const adminCheck = doc.data().isAdmin
+    //       return adminCheck
+    //     } else {
+    //       console.log('No user: user ID is invalid')
+    //     }
+    //   })
+
+    //   // return this.$store.getter.getSUser
+    // }
+  },
+  methods: {},
+  watch: {
+    userId: function() {
+      const userRef = firebase
+        .firestore()
+        .collection('users')
+        .doc(this.userId)
+
+      userRef.get().then(doc => {
+        if (doc.exists) {
+          console.log(doc.data().isAdmin)
+          const isAdmin = doc.data().isAdmin
+          this.isAdmin = isAdmin
+        } else {
+          console.log('No user: user ID is invalid')
+        }
+      })
+    }
+  },
+  mounted() {
+    console.log(this.$store.getters.getUser)
+  }
 }
 </script>
 

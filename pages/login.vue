@@ -97,7 +97,7 @@ export default {
         })
     },
     goToRegistration() {
-      this.$router.push('registrationPage')
+      this.$router.push('registration')
     },
     reset() {
       this.error = false

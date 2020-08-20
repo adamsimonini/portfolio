@@ -17,12 +17,21 @@
         </v-avatar>-->
         <v-divider class="pr-3 mr-3" :vertical="true"></v-divider>
       </div>
-      <!-- <nuxt-link :to="this.user ? 'inspire' : 'loginPage'"> -->
+      <!-- <nuxt-link :to="this.user ? 'inspire' : 'login'"> -->
       <v-btn color="primary" @click="user ? logout() : goToLogin()">{{user ? "logout" : "sign in"}}</v-btn>
       <!-- </nuxt-link> -->
     </v-app-bar>
-    <v-content>
-      <v-container id="container">
+    <v-content class="main-content-box">
+      <div class="loader-box">
+        <v-progress-circular
+          v-if="loggingOut"
+          :size="100"
+          color="primary"
+          indeterminate
+          class="loader"
+        ></v-progress-circular>
+      </div>
+      <v-container v-if="!loggingOut" id="container">
         <nuxt />
       </v-container>
     </v-content>
@@ -47,6 +56,7 @@ export default {
       clipped: false,
       fixed: false,
       item: 0,
+      loggingOut: false,
       navOptions: {
         drawer: true,
         mini: false
@@ -72,6 +82,8 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.user = user
+        // console.log('user:')
+        // console.log(user)
         this.userName = user.displayName
         this.updateUser()
       } else {
@@ -82,8 +94,8 @@ export default {
     // delete collection from DB
     // firebase
     //   .firestore()
-    //   .collection('conferences')
-    //   .doc('asd')
+    //   .collection('users')
+    //   .doc('569H7KlbT8afQovLWMpc4DyzHh33')
     //   .delete()
     //   .then(function() {
     //     console.log('Document successfully deleted!')
@@ -103,6 +115,7 @@ export default {
         .auth()
         .signOut()
         .then(() => {
+          this.loggingOut = true
           this.user = null
           this.userName = null
           this.$router.push('')
@@ -111,7 +124,11 @@ export default {
         })
     },
     goToLogin() {
-      this.$router.push('loginPage')
+      this.$router.push('login')
+    },
+    curerntUser() {
+      console.log('user:')
+      return this.$store.getters.getUser
     }
   }
 }
@@ -138,5 +155,18 @@ export default {
 }
 .v-application a {
   color: transparent;
+}
+.loader {
+  margin: auto;
+  height: 100%;
+}
+.main-content-box {
+  display: flex;
+}
+.loader-box {
+  position: absolute;
+  top: 40%;
+  height: 100px;
+  right: 50%;
 }
 </style>

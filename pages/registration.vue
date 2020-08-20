@@ -129,7 +129,7 @@ export default {
       this.$refs.observer.validate()
       const info = {
         name: this.name,
-        division: this.division,
+        division: this.selectedDivision,
         email: this.email,
         password: this.passwordOne
       }
@@ -141,7 +141,14 @@ export default {
             firebase.auth().currentUser.updateProfile({
               displayName: this.name
             })
+            firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
+              name: info.name,
+              division: info.division,
+              email: info.email, 
+              isAdmin: false
+            })
             this.$router.push('/')
+            // window.location.reload()
           })
           .catch(error => {
             this.errorMessage = error.message
@@ -150,10 +157,11 @@ export default {
       }
     },
     goToLogin() {
-      this.$router.push('loginPage')
+      this.$router.push('login')
     },
     reset() {
       this.error = false
+      this.errorMessage = ''
     }
   },
   watch: {

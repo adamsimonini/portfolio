@@ -19,7 +19,6 @@
         <v-list-item v-if="isUser">
           <v-switch
             v-model="canDelete"
-            class="ma-2"
             label="Enable account deletion. Account deletion cannot be undone."
           ></v-switch>
         </v-list-item>
@@ -53,11 +52,24 @@ export default {
   methods: {
     deleteAccount() {
       var user = firebase.auth().currentUser
+      console.log(user)
       user
         .delete()
         .then(function() {
           alert('Your account has been deleted and you have been logged out.')
-          window.location.reload()
+          // delete the document within the users collection
+          firebase
+            .firestore()
+            .collection('users')
+            .doc(user.uid)
+            .delete()
+            .then(function() {
+              console.log('Document successfully deleted!')
+            })
+            .catch(function(error) {
+              console.error('Error removing document: ', error)
+            })
+            window.location.reload()
         })
         .catch(function(error) {
           alert(`Deletion failed. Error: ${error}`)
@@ -65,7 +77,9 @@ export default {
     }
   },
   mounted() {
-    this.$store.getters.getUser != null ? this.isUser = true : this.isUser = false
+    this.$store.getters.getUser != null
+      ? (this.isUser = true)
+      : (this.isUser = false)
   }
 }
 </script>
