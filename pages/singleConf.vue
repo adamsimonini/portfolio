@@ -1,5 +1,5 @@
 <template>
-  <div>
+   <v-layout column class="column">
     <div v-if="loaded && imageUrl" class="conf-card">
       <img class="conf-image" :src="imageUrl" @error="imgPlaceholder" alt="Conference image" />
       <div class="all-conf-info">
@@ -103,7 +103,7 @@
         <span>{{ $t('back')}}</span>
       </v-btn>
     </div>
-  </div>
+  </v-layout>
 </template>
 
 <script>
@@ -160,7 +160,6 @@ export default {
       try {
         const storageRef = storage.ref(this.imageRef)
         const imageUrl = storageRef.getDownloadURL().then(url => {
-          console.log(url)
           this.imageUrl = url
         })
       } catch (err) {
@@ -190,7 +189,6 @@ export default {
   },
   mounted() {
     const selectedConf = this.$store.getters.getSelectedConf
-    console.log(selectedConf)
     this.id = selectedConf.id
     this.name = selectedConf.name
     this.deadline = selectedConf.deadline
@@ -208,6 +206,9 @@ export default {
 </script>
 
 <style scoped>
+.column {
+  padding: 0 10%
+}
 .conf-card {
   font-size: 25px;
   display: flex;
@@ -233,7 +234,7 @@ export default {
 .conf-image {
   width: 100%;
   min-width: 250px;
-  max-width: 40%;
+  max-width: 400px;
   grid-area: image;
   border-radius: 10px;
 }

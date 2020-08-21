@@ -18,7 +18,7 @@ export const conferences = [
       }
     },
     {
-      title: "Publich Health 2020",
+      title: "Public Health 2020",
       image: "https://www.cpha.ca/sites/default/files/2020-02/ph20-homepage-banner.jpg",
       startDate: "2020-04-28",
       endDate: "2020-04-30",

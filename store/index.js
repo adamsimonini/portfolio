@@ -1,7 +1,7 @@
 export const state = () => ({
     layout: 'default',
     darkTheme: true,
-    fontSize: '22px',
+    fontSize: '18px',
     selectedConf: {},
     user: null,
 });

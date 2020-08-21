@@ -11,15 +11,14 @@
         <v-divider class="mx-4"></v-divider>
         <v-list-item v-if="isUser" :disabled="!canDelete" @click="deleteAccount()">
           <v-list-item-icon>
-            <v-icon>{{canDelete ? "mdi-delete" : "mdi-delete-outline"}}</v-icon>
+            <v-icon :color="canDelete ? 'red' : 'grey'">{{canDelete ? "mdi-delete" : "mdi-delete-outline"}}</v-icon>
           </v-list-item-icon>
-          <v-list-item-content>{{ $t("deleteAccount") }}</v-list-item-content>
-          <v-spacer />
+          <v-list-item-content >{{ $t("deleteAccount") }}</v-list-item-content>
         </v-list-item>
         <v-list-item v-if="isUser">
           <v-switch
             v-model="canDelete"
-            label="Enable account deletion. Account deletion cannot be undone."
+            :label="canDelete ? 'Disable deletion' : 'Enable deletion'"
           ></v-switch>
         </v-list-item>
       </v-list-item-group>
@@ -39,7 +38,7 @@ export default {
     return {
       layout: this.$store.state.layout,
       canDelete: false,
-      isUser: false
+      isUser: false,
     }
   },
   layout: 'default',
