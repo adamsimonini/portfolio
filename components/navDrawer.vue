@@ -11,7 +11,7 @@
   >
     <v-list nav>
       <v-list-item-group>
-        <nuxt-link class="nuxt-link" :to="localePath('/')">
+        <nuxt-link class="nuxt-link" :to="localePath('index')">
           <v-list-item>
             <v-list-item-icon>
               <v-icon>mdi-apps</v-icon>

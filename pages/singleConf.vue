@@ -1,5 +1,5 @@
 <template>
-   <v-layout column class="column">
+  <v-layout column class="column">
     <div v-if="loaded && imageUrl" class="conf-card">
       <img class="conf-image" :src="imageUrl" @error="imgPlaceholder" alt="Conference image" />
       <div class="all-conf-info">
@@ -98,10 +98,12 @@
       </div>
     </div>
     <div v-if="loaded && imageUrl" class="back-button">
-      <v-btn large @click="$router.push('/')">
-        <v-icon>mdi-arrow-left-circle</v-icon>
-        <span>{{ $t('back')}}</span>
-      </v-btn>
+      <nuxt-link :to="localePath('index')">
+        <v-btn large @click="$router.push('index')">
+          <v-icon>mdi-arrow-left-circle</v-icon>
+          <span>{{ $t('back')}}</span>
+        </v-btn>
+      </nuxt-link>
     </div>
   </v-layout>
 </template>
@@ -183,7 +185,9 @@ export default {
           .pop()
           .split(';')
           .shift()
-      console.log('There was an error accessing the locale cookie. Reverint to English')
+      console.log(
+        'There was an error accessing the locale cookie. Reverint to English'
+      )
       return 'en'
     }
   },
@@ -207,7 +211,7 @@ export default {
 
 <style scoped>
 .column {
-  padding: 0 10%
+  padding: 0 10%;
 }
 .conf-card {
   font-size: 25px;

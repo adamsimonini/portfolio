@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout column justify-center align-center>
     <v-flex class="text-center">
       <h2>{{ $t("settings") }}</h2>
       <v-list-item-group>
@@ -18,7 +18,7 @@
         <v-list-item v-if="isUser">
           <v-switch
             v-model="canDelete"
-            :label="canDelete ? 'Disable deletion' : 'Enable deletion'"
+            :label="canDelete ? 'Disable account deletion' : 'Enable account deletion'"
           ></v-switch>
         </v-list-item>
       </v-list-item-group>
