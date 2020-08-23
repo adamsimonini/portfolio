@@ -19,7 +19,7 @@
             height="20"
             width="20"
             color="rgba(34, 139, 34, 1)"
-            flat
+            text
             @click="close()"
           >
             <v-icon>mdi-close-box</v-icon>
@@ -163,6 +163,27 @@
               </v-menu>
             </v-col>
           </v-row>
+          <v-combobox
+            v-model="tags"
+            :items="items"
+            chips
+            clearable
+            label="Tags"
+            multiple
+            prepend-icon="mdi-tag-plus"
+          >
+            <template v-slot:selection="{ attrs, item, select, selected }">
+              <v-chip
+                v-bind="attrs"
+                :input-value="selected"
+                close
+                @click="select"
+                @click:close="remove(item)"
+              >
+                <strong>{{ item }}</strong>&nbsp;
+              </v-chip>
+            </template>
+          </v-combobox>
           <ValidationProvider v-slot="{ errors }" name="file" rules="required">
             <v-file-input
               :rules="imageRules"
@@ -219,6 +240,8 @@ export default {
     errorMessage: null,
     success: false,
     error: false,
+    tags: [],
+    items: ['Mental Health', 'Healthy Eating', 'Tabacco', 'Physical Activity'],
     imageRules: [
       value =>
         !value ||
@@ -228,6 +251,15 @@ export default {
   }),
   methods: {
     addConference: function() {
+      if (this.imageFile === null) {
+        this.error = true
+        this.errorMessage = 'An image is required'
+        setTimeout(() => {
+          this.error = false
+          this.errorMessage = null
+        }, 5000)
+        return false
+      }
       // check validation
       this.$refs.observer.validate()
       const confInfo = {
@@ -238,6 +270,7 @@ export default {
         startDate: this.startDate,
         endDate: this.endDate,
         deadline: this.deadline,
+        tags: this.tags,
         image: this.imageFile
       }
       if (
@@ -258,7 +291,7 @@ export default {
           var newConfImage = this.imageFile
           // upload the image file
           newConfImageRef.put(newConfImage).then(function(snapshot) {
-            console.log('Uploaded a blob or file!')
+            console.log('Image has been uploaded to storage')
           })
           // push conference data to conferences
           firebase
@@ -273,18 +306,20 @@ export default {
               startDate: confInfo.startDate,
               endDate: confInfo.endDate,
               deadline: confInfo.deadline,
+              tags: confInfo.tags,
               timeAdded: firebase.firestore.FieldValue.serverTimestamp(),
-              // add the reference for the stored image to the document 
+              // add the reference for the stored image to the document
               imageRef: newConfImageRef.fullPath
             })
             // the callback below only works with an arrow function, as it causes Vue to make "this" refer to the component instance
             .then(() => {
-              this.success = true,
-              this.name = null,
-              this.city = null,
-              this.country = null,
-              this.website = null,
-              this.imageFile = null
+              // reset values
+              this.success = true
+              setTimeout(() => {
+                this.success = false
+              }, 8000)
+              // reset validation
+              this.$refs.observer.reset()
             })
             .catch(function(error) {
               console.error('Error writing document: ', error)
@@ -301,6 +336,10 @@ export default {
     },
     close() {
       this.success = false
+    },
+    remove(item) {
+      this.tags.splice(this.tags.indexOf(item), 1)
+      this.tags = [...this.tags]
     }
   },
   watch: {}

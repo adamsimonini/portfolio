@@ -16,7 +16,8 @@
           :name="conf.name"
           :startDate="conf.startDate"
           :endDate="conf.endDate"
-          :location="conf.location"
+          :city="conf.city"
+          :country="conf.country"
           :deadline="conf.deadline"
         />
       </div>
@@ -53,10 +54,8 @@ export default {
         this.conferences.push({
           id: conference.id,
           name: conference.data().name,
-          location: {
-            city: conference.data().city,
-            country: conference.data().country
-          },
+          city: conference.data().city,
+          country: conference.data().country,
           website: conference.data().website,
           startDate: conference.data().startDate,
           endDate: conference.data().endDate,

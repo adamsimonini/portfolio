@@ -4,21 +4,22 @@
       <v-icon>mdi-apps</v-icon>
     </v-list-item-action>
     <v-list-item-content>
-      Font size {{fontSize}}
+      {{ $t("fontSize") }} {{fontSize}}
       <v-btn
         width="50"
         class="ml-5 mr-5 size-button"
-        :color="fontSize == '14px' ? 'primary' : false"
-        :depressed="fontSize == '14px' ? 'primary' : false"
+        :color="fontSize == '14px' ? 'primary' : 'none'"
+        :depressed="fontSize == '14px' ? true : false"
         @click="fontChange('S')"
       >
         <b>S</b>
       </v-btn>
       <v-btn
+      
         width="50"
         class="mr-5 size-button"
-        :color="fontSize == '18px' ? 'primary' : false"
-        :depressed="fontSize == '18px' ? 'primary' : false"
+        :color="fontSize == '18px' ? 'primary' : 'none'"
+        :depressed="fontSize == '18px' ? true : false"
         @click="fontChange('M')"
       >
         <b>M</b>
@@ -26,8 +27,8 @@
       <v-btn
         width="50"
         class="mr-5 size-button"
-        :color="fontSize == '22px' ? 'primary' : false"
-        :depressed="fontSize == '22px' ? 'primary' : false"
+        :color="fontSize == '22px' ? 'primary' : 'none'"
+        :depressed="fontSize == '22px' ? true : false"
         @click="fontChange('L')"
       >
         <b>L</b>

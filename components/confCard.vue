@@ -27,7 +27,7 @@
     <div class="conf-details">
       <div class="details-item conf-location">
         <v-icon>mdi-map-marker</v-icon>
-        <span>{{location.city}}, {{location.country}}</span>
+        <span>{{city}}, {{country}}</span>
       </div>
       <!-- TODO: Add disabled when no link is provided  -->
       <div v-if="website" class="details-item conf-website">
@@ -87,12 +87,13 @@ export default {
       type: String,
       default: 'not provided'
     },
-    location: {
-      type: Object,
-      default: {
-        city: 'not provided',
-        countey: 'not provided'
-      }
+    city: {
+      type: String,
+      default: 'not provided'
+    },
+    country: {
+      type: String,
+      default: 'not provided'
     },
     website: {
       type: String,
@@ -113,7 +114,6 @@ export default {
   },
   watch: {
     userId: function() {
-      console.log('within userId watcher')
       const userRef = firebase
         .firestore()
         .collection('users')
@@ -141,7 +141,8 @@ export default {
         imageRef: this.$props.imageRef,
         startDate: this.$props.startDate,
         endDate: this.$props.endDate,
-        location: this.$props.location,
+        city: this.$props.city,
+        country: this.$props.country,
         website: this.$props.website,
         deadline: this.$props.deadline
       }
@@ -152,7 +153,6 @@ export default {
       try {
         const storageRef = storage.ref(this.$props.imageRef)
         const imageUrl = storageRef.getDownloadURL().then(url => {
-          console.log(url)
           this.imageUrl = url
         })
       } catch (err) {

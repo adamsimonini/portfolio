@@ -191,20 +191,37 @@ export default {
       return 'en'
     }
   },
+  created() {},
   mounted() {
+    // if this is a shared link, extract the idea and set the selected conference in vuex
+    if (window.location.search) {
+      console.log(window.location.search)
+      let id = decodeURI(window.location.search).replace(/[^\w\s]/gi, '')
+      alert(
+        `You are looking for the folloing conference: ${id}, which is encoded in the URL. Support for this request will be added in the future. Until then please search for the conference on the home page.`
+      )
+      this.$router.push('/')
+      // firebase.firestore().collection('conferences').doc('8th ISPAH Congress').get().then((doc) => {
+      //   this.$store.commit('updateConferenceSelection', doc.data())
+      //   console.log(doc.data())
+      // })
+      // console.log(id)
+    }
     const selectedConf = this.$store.getters.getSelectedConf
-    this.id = selectedConf.id
-    this.name = selectedConf.name
-    this.deadline = selectedConf.deadline
-    this.picker.end.date = selectedConf.endDate
-    this.imageRef = selectedConf.imageRef
-    this.city = selectedConf.location.city
-    this.country = selectedConf.location.country
-    this.picker.start.date = selectedConf.startDate
-    this.website = selectedConf.website
+    this.id = selectedConf.id || null
+    this.name = selectedConf.name || null
+    this.deadline = selectedConf.deadline || null
+    this.picker.end.date = selectedConf.endDate || null
+    this.imageRef = selectedConf.imageRef || null
+    this.city = selectedConf.city || null
+    this.country = selectedConf.country || null
+    this.picker.start.date = selectedConf.startDate || null
+    this.website = selectedConf.website || null
 
     this.getImageUrl()
     this.loaded = true
+    let encoded = encodeURI(this.id)
+    window.history.replaceState(null, null, `?${encodeURI(this.name)}`)
   }
 }
 </script>
