@@ -208,6 +208,7 @@ export default {
 <style scoped>
 .conf-card {
   max-width: 350px;
+  width: 350px;
   margin: 40px 20px;
 }
 .conf-title {
@@ -243,9 +244,9 @@ export default {
 }
 .conf-image img {
   width: 350px;
+  height: 175px;
   transition: all 0.2s ease-in-out;
   border-radius: 10px;
-  height: 175px;
 }
 .conf-image img:hover {
   transform: scale(0.95);

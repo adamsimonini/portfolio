@@ -2,10 +2,14 @@
   <v-layout column justify-center align-center class="column">
     <!-- <div v-if="!loaded">
       <v-progress-circular :size="100" color="primary" indeterminate class="loader"></v-progress-circular>
-    </div> -->
+    </div>-->
+    <div class="loader-box" v-if="!loaded" >
+      <v-progress-circular :size="100" color="primary" indeterminate class="loader"></v-progress-circular>
+    </div>
     <v-flex xs12 sm8 md6 v-if="loaded">
       <!-- <LangToggle />
       <nuxt-link :to="localePath('inspire')">inspire</nuxt-link>-->
+
       <h2 class="text-center">{{ $t('allConferencesTitle')}}</h2>
       <div class="all-conferneces">
         <ConfCard
@@ -32,7 +36,7 @@ import { mapState } from 'vuex'
 import firebase from 'firebase'
 
 if ('indexedDB' in window) {
-  console.log('This browser does support IndexedDB');
+  console.log('This browser does support IndexedDB')
 }
 
 export default {
@@ -67,7 +71,9 @@ export default {
           imageRef: conference.data().imageRef
         })
       }
-      this.loaded = true
+      setTimeout(() => {
+        this.loaded = true
+      }, 1000)
     }
     conferences()
   },
@@ -95,16 +101,13 @@ export default {
 h2 {
   margin: 0 6%;
 }
-
 .loader-box {
-  position: absolute;
-  top: 40%;
-  height: 100px;
-  right: 50%;
-}
-.loader {
   margin: auto;
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
 }
 @media only screen and (max-width: 1400px) {
   .all-conferneces {
