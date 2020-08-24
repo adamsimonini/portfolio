@@ -43,7 +43,7 @@
               prepend-icon="mdi-format-title"
               v-model="name"
               :error-messages="errors"
-              label="Name of conference"
+              :label="$t('conferenceName')"
               required
             ></v-text-field>
           </ValidationProvider>
@@ -53,7 +53,7 @@
               prepend-icon="mdi-map-marker"
               v-model="city"
               :error-messages="errors"
-              label="City"
+              :label="$t('city')"
               required
             ></v-text-field>
           </ValidationProvider>
@@ -63,7 +63,7 @@
               prepend-icon="mdi-earth"
               v-model="country"
               :error-messages="errors"
-              label="Country"
+              :label="$t('country')"
               required
             ></v-text-field>
           </ValidationProvider>
@@ -73,7 +73,7 @@
               prepend-icon="mdi-laptop"
               v-model="website"
               :error-messages="errors"
-              label="Website"
+              :label="$t('website')"
               required
             ></v-text-field>
           </ValidationProvider>
@@ -92,7 +92,7 @@
                   <v-text-field
                     @focus="reset()"
                     v-model="startDate"
-                    label="Start date"
+                    :label="$t('startDate')"
                     prepend-icon="mdi-calendar"
                     readonly
                     v-bind="attrs"
@@ -120,7 +120,7 @@
                   <v-text-field
                     @focus="reset()"
                     v-model="endDate"
-                    label="End date"
+                    :label="$t('endDate')"
                     prepend-icon="mdi-calendar-today"
                     readonly
                     v-bind="attrs"
@@ -148,7 +148,7 @@
                   <v-text-field
                     @focus="reset()"
                     v-model="deadline"
-                    label="Deadline"
+                    :label="$t('deadline')"
                     prepend-icon="mdi-calendar-remove"
                     readonly
                     v-bind="attrs"
@@ -168,7 +168,7 @@
             :items="items"
             chips
             clearable
-            label="Tags"
+            :label="$t('tags')"
             multiple
             prepend-icon="mdi-tag-plus"
           >
@@ -190,12 +190,12 @@
               required
               show-size
               accept="image/png, image/jpeg, image/bmp"
-              placeholder="Add an image"
+              :label="$t('addImage')"
               prepend-icon="mdi-camera"
               v-model="imageFile"
             ></v-file-input>
           </ValidationProvider>
-          <v-btn color="primary" class="mr-4" type="addConference">Add Conference</v-btn>
+          <v-btn color="primary" class="mr-4" type="addConference">{{$t('addConference')}}</v-btn>
         </v-form>
       </ValidationObserver>
     </v-flex>

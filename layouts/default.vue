@@ -22,7 +22,7 @@ The nuxt component renders all the individual pages, which can be found in 'root
         <v-divider class="pr-3 mr-3" :vertical="true"></v-divider>
       </div>
       <!-- <nuxt-link :to="this.user ? 'inspire' : 'login'"> -->
-      <v-btn color="primary" @click="user ? logout() : goToLogin()">{{user ? "logout" : "sign in"}}</v-btn>
+      <v-btn color="primary" @click="user ? logout() : goToLogin()">{{user ? $t('logout') : $t('login')}}</v-btn>
       <!-- </nuxt-link> -->
     </v-app-bar>
     <v-content class="main-content-box">

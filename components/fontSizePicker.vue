@@ -12,17 +12,16 @@
         :depressed="fontSize == '14px' ? true : false"
         @click="fontChange('S')"
       >
-        <b>S</b>
+        <b>{{ $t("small") }}</b>
       </v-btn>
       <v-btn
-      
         width="50"
         class="mr-5 size-button"
         :color="fontSize == '18px' ? 'primary' : 'none'"
         :depressed="fontSize == '18px' ? true : false"
         @click="fontChange('M')"
       >
-        <b>M</b>
+        <b>{{ $t("medium") }}</b>
       </v-btn>
       <v-btn
         width="50"
@@ -31,7 +30,7 @@
         :depressed="fontSize == '22px' ? true : false"
         @click="fontChange('L')"
       >
-        <b>L</b>
+        <b>{{ $t("large") }}</b>
       </v-btn>
     </v-list-item-content>
   </v-list-item>

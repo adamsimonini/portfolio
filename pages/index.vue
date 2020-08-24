@@ -31,6 +31,10 @@ import { mapState } from 'vuex'
 // import { conferences } from '@@/static/conferences.js'
 import firebase from 'firebase'
 
+if ('indexedDB' in window) {
+  console.log('This browser does support IndexedDB');
+}
+
 export default {
   name: 'index',
   data: function() {

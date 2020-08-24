@@ -15,7 +15,7 @@
           prepend-icon="mdi-email"
           v-model="email"
           :error-messages="errors"
-          label="E-mail"
+          :label="$t('email')"
           required
           @focus="reset()"
         ></v-text-field>
@@ -25,19 +25,19 @@
           prepend-icon="mdi-lock"
           v-model="password"
           :error-messages="errors"
-          label="password"
+          :label="$t('password')"
           :type="showPass ? 'text' : 'password'"
           required
           @click:append="showPass = !showPass"
           :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
           @focus="reset()"
         ></v-text-field>
-        <v-btn color="primary" class="mr-4" type="submit">sign in</v-btn>
+        <v-btn color="primary" class="mr-4" type="submit">{{$t('login')}}</v-btn>
       </ValidationProvider>
     </v-form>
     <span>
-      Don't have an account?
-      <v-btn @click="goToRegistration">Register Here</v-btn>
+      {{$t('accountDontHave')}}
+      <v-btn @click="goToRegistration">{{$t('registerHere')}}</v-btn>
     </span>
   </ValidationObserver>
 </template>

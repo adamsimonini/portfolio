@@ -70,11 +70,11 @@
           :append-icon="showPassTwo ? 'mdi-eye' : 'mdi-eye-off'"
         ></v-text-field>
       </ValidationProvider>
-      <v-btn color="primary" class="mr-4" type="submit">Register</v-btn>
+      <v-btn color="primary" class="mr-4" type="submit">{{ $t('register') }}</v-btn>
     </v-form>
     <span>
-      Already have an account?
-      <v-btn @click="goToLogin">Sign In Here</v-btn>
+      {{ $t('accountDoHave')}}
+      <v-btn @click="goToLogin">{{ $t('loginHere')}}</v-btn>
     </span>
   </ValidationObserver>
 </template>
@@ -141,12 +141,16 @@ export default {
             firebase.auth().currentUser.updateProfile({
               displayName: this.name
             })
-            firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
-              name: info.name,
-              division: info.division,
-              email: info.email, 
-              isAdmin: false
-            })
+            firebase
+              .firestore()
+              .collection('users')
+              .doc(firebase.auth().currentUser.uid)
+              .set({
+                name: info.name,
+                division: info.division,
+                email: info.email,
+                isAdmin: false
+              })
             this.$router.push('/')
             // window.location.reload()
           })

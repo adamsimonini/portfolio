@@ -18,7 +18,7 @@
         <v-list-item v-if="isUser">
           <v-switch
             v-model="canDelete"
-            :label="canDelete ? 'Disable account deletion' : 'Enable account deletion'"
+            :label="canDelete ? $t('deletionEnable') : $t('deletionDisable')"
           ></v-switch>
         </v-list-item>
       </v-list-item-group>
