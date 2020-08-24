@@ -249,8 +249,8 @@ export default {
   border-radius: 10px;
 }
 .conf-image img:hover {
-  transform: scale(0.95);
-  box-shadow: 2px 7px 23px -4px rgba(0, 0, 0, 0.75);
+  transform: scale(0.97);
+  box-shadow: 2px 6px 15px -4px rgba(0, 0, 55, 0.75);
 }
 a {
   text-decoration: none;

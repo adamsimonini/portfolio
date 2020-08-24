@@ -1,109 +1,79 @@
 <template>
-  <v-layout column class="column">
+  <v-layout column align-center>
     <div v-if="loaded && imageUrl" class="conf-card">
+      <div class="conf-title">
+        <h2>{{this.name}}</h2>
+      </div>
       <img class="conf-image" :src="imageUrl" @error="imgPlaceholder" alt="Conference image" />
-      <div class="all-conf-info">
-        <div class="conf-title">
-          <h2>{{this.name}}</h2>
-        </div>
-        <div class="conf-dates">
-          <!-- <span>Start Date</span> -->
-          <v-menu
-            ref="menu"
-            v-model="picker.start.menu"
-            :close-on-content-click="false"
-            :return-value.sync="picker.start.date"
-            transition="scale-transition"
-            offset-y
-            min-width="290px"
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                :value="formatDate(picker.start.date)"
-                label="Start Date"
-                prepend-icon="mdi-calendar-month"
-                readonly
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker
-              v-model="picker.start.date"
-              no-title
-              scrollable
-              readonly
-              color="green"
-              :locale="locale"
-              show-current="false"
-            >
-              <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="picker.start.menu = false">{{ $t("close") }}</v-btn>
-            </v-date-picker>
-          </v-menu>
-          <!-- <span>End Date</span> -->
-          <v-menu
-            ref="menu"
-            v-model="picker.end.menu"
-            :close-on-content-click="false"
-            :return-value.sync="picker.end.date"
-            transition="scale-transition"
-            offset-y
-            min-width="290px"
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                :value="formatDate(picker.end.date)"
-                label="End Date"
-                prepend-icon="mdi-calendar-month"
-                readonly
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker
-              v-model="picker.end.date"
-              no-title
-              scrollable
-              readonly
-              color="red"
-              :locale="locale"
-              show-current="false"
-            >
-              <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="picker.end.menu = false">{{ $t("close") }}</v-btn>
-            </v-date-picker>
-          </v-menu>
-        </div>
-        <div class="conf-details">
-          <div class="details-item conf-location">
-            <v-icon>mdi-map-marker</v-icon>
-            <span>{{city}}, {{country}}</span>
-          </div>
-          <!-- TODO: Add disabled when no link is provided  -->
-          <div class="details-item conf-website">
-            <v-btn :href="`//${website}`" target="_blank" large :disabled="disabled">
-              <v-icon>mdi-link-variant</v-icon>
-              <span>{{ $t('website')}}</span>
-            </v-btn>
-          </div>
-        </div>
-        <div class="conf-deadline">
-          <span>{{ $t("deadline") }}: {{deadline}}</span>
-        </div>
-        <!-- TODO: enable report feature that links to OneDrive -->
-        <!-- <div class="download" v-if="reportName">
+      <!-- <span>Start Date</span> -->
+      <v-menu
+        ref="menu"
+        v-model="picker.start.menu"
+        :close-on-content-click="false"
+        :return-value.sync="picker.start.date"
+        transition="scale-transition"
+        offset-y
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            class="picker"
+            :value="formatDate(picker.start.date)"
+            :label="$t('startDate')"
+            prepend-icon="mdi-calendar-month"
+            readonly
+          ></v-text-field>
+        </template>
+      </v-menu>
+      <!-- <span>End Date</span> -->
+      <v-menu
+        ref="menu"
+        v-model="picker.end.menu"
+        transition="scale-transition"
+        offset-y
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            class="picker"
+            :value="formatDate(picker.end.date)"
+            :label="$t('endDate')"
+            prepend-icon="mdi-calendar-month"
+            readonly
+          ></v-text-field>
+        </template>
+      </v-menu>
+
+      <div class="conf-location">
+        <v-icon>mdi-map-marker</v-icon>
+        <span>{{city}}, {{country}}</span>
+      </div>
+      <!-- TODO: Add disabled when no link is provided  -->
+      <div class="details-item conf-website">
+        <v-btn color="primary" small :href="`//${website}`" target="_blank" large :disabled="disabled">
+          <v-icon>mdi-link-variant</v-icon>
+          <span>{{ $t('website')}}</span>
+        </v-btn>
+      </div>
+
+      <div class="conf-deadline">
+        <span>{{ $t("deadline") }}: {{deadline}}</span>
+      </div>
+      <!-- TODO: enable report feature that links to OneDrive -->
+      <!-- <div class="download" v-if="reportName">
           <v-btn :href="`//${reportUrl}`" target="_blank" large>
             <span>View {{reportName}}'s Report</span>
             <v-icon>mdi-file-document</v-icon>
           </v-btn>
-        </div>-->
+      </div>-->
+      <div v-if="loaded && imageUrl" class="back-button">
+        <nuxt-link :to="localePath('index')">
+          <v-btn large @click="$router.push('index')">
+            <v-icon>mdi-arrow-left-circle</v-icon>
+            <span>{{ $t('back')}}</span>
+          </v-btn>
+        </nuxt-link>
       </div>
-    </div>
-    <div v-if="loaded && imageUrl" class="back-button">
-      <nuxt-link :to="localePath('index')">
-        <v-btn large @click="$router.push('index')">
-          <v-icon>mdi-arrow-left-circle</v-icon>
-          <span>{{ $t('back')}}</span>
-        </v-btn>
-      </nuxt-link>
     </div>
   </v-layout>
 </template>
@@ -233,31 +203,32 @@ export default {
 .conf-card {
   font-size: 25px;
   display: flex;
-  margin-top: 50px;
+  flex-direction: column;
+  margin-top: 20px;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 800px;
+}
+.conf-card div {
+  max-height: 40px;
 }
 .conf-title h2 {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-.all-conf-info {
-  display: grid;
-  width: 60%;
-  grid-template-columns: 5% 1fr 5%;
-  grid-template-rows: auto;
-  grid-template-areas:
-    '. title .'
-    '. dates .'
-    '. details .'
-    '. deadline .'
-    '. download .';
+.picker {
+  width: 100%;
 }
 .conf-image {
   width: 100%;
   min-width: 250px;
-  max-width: 400px;
+  max-width: 300px;
   grid-area: image;
   border-radius: 10px;
+}
+.conf-location {
+  width: 100%;
 }
 @media only screen and (max-width: 1430px) {
   .conf-card {
@@ -314,22 +285,6 @@ export default {
 .v-text-field__slot:hover {
   cursor: pointer !important;
 }
-.conf-details {
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  grid-area: details;
-}
-.conf-details div {
-  width: 50%;
-  padding: 0 10% 0 0;
-}
-.details-item {
-  width: 33%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
 .conf-deadline {
   grid-area: deadline;
   display: flex;
@@ -349,6 +304,5 @@ a {
 }
 .back-button {
   margin-top: 20px;
-  text-align: center;
 }
 </style>
