@@ -12,7 +12,7 @@ The nuxt component renders all the individual pages, which can be found in 'root
       <!-- <v-btn icon @click.stop="navOptions.mini = !navOptions.mini">
         <v-icon>mdi-{{ `chevron-${navOptions.mini ? 'right' : 'left'}` }}</v-icon>
       </v-btn>-->
-      <v-toolbar-title v-text="this.$t('conferenceTracker')" />
+      <v-toolbar-title v-text="this.$t('conferenceRepo')" />
       <v-spacer />
       <div :v-if="userName" class="avatar-bar">
         <v-toolbar-title v-text="userName" />

@@ -10,7 +10,7 @@ export default {
   city: "City",
   close: "Close",
   conferenceName: "Name of conference",
-  conferenceTracker: "Partnerships & Strategy Division - Conference Tracker",
+  conferenceRepo: "Conference Information Repository",
   country: "Country",
   darkMode: "Dark Mode",
   deadline: "Deadline",

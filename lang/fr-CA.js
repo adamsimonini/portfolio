@@ -10,7 +10,7 @@ export default {
   city: "Ville",
   close: "Fermer",
   conferenceName: "Nom de la conférence",
-  conferenceTracker: "Suivi de conférence PSD",
+  conferenceRepo: "Référentiel d'informations sur la conférence",
   country: "Pays",
   darkMode: "Mode sombre",
   deadline: "date limite",
