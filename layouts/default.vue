@@ -47,6 +47,7 @@ import NavDrawer from '@c/navDrawer.vue'
 import firebase from 'firebase'
 
 export default {
+  name: "defaultLayout",
   components: {
     NavDrawer
   },

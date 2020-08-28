@@ -1,5 +1,5 @@
 <template>
-  <div class="conf-card">
+  <div v-show="isLoaded" class="conf-card">
     <div class="conf-title">
       <h3>{{name}}</h3>
     </div>
@@ -63,7 +63,8 @@ export default {
     disabled: false,
     imageUrl: '',
     canDelete: false,
-    isAdmin: false
+    isAdmin: false,
+    isLoaded: false,
   }),
   props: {
     // TODO: can I set default value to trigger when field is left blank? At the moment it never triggers
@@ -128,6 +129,11 @@ export default {
           console.log('No user: user ID is invalid')
         }
       })
+    },
+    imageRef: function() {
+      // what for when the reference changes due to filtering, and trigger getImage in order to get new image. 
+      // TODO: all the images SHOULD be cashed, such that firebase calls don't need to be made most of the time
+      this.getImageUrl();
     }
   },
   methods: {
@@ -148,22 +154,23 @@ export default {
       }
       this.$store.commit('updateConferenceSelection', conferenceData)
     },
-    getImageUrl() {
+    async getImageUrl() {
       const storage = firebase.storage()
       try {
-        const storageRef = storage.ref(this.$props.imageRef)
-        const imageUrl = storageRef.getDownloadURL().then(url => {
+        const storageRef = await storage.ref(this.$props.imageRef)
+        const imageUrl = await storageRef.getDownloadURL().then(url => {
           this.imageUrl = url
         })
       } catch (err) {
         console.log(err)
-        const storageRef = storage
+        const storageRef = await storage
           .ref('no-image-found.png')
           .getDownloadURL()
           .then(function(url) {
             this.imageUrl = url
           })
       }
+      this.isLoaded = true
     },
     deleteConference() {
       const conferenceRef = firebase

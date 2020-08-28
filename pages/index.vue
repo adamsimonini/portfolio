@@ -34,7 +34,7 @@
           :mobile-break-point="1400"
           id="filter-drawer"
         >
-        <h3>Filters</h3>
+          <h3>Filters</h3>
           <span>
             <b>Year</b>
           </span>
@@ -93,12 +93,12 @@ export default {
       imageUrl: [],
       loaded: false,
       sortDateOrder: 'newest',
-      cities: ['All'],
-      years: ['All'],
+      cities: [],
+      years: [],
       allConferences: [],
       filters: {
         city: 'All',
-        year: 'All',
+        year: 'All'
       },
       clipped: false,
       fixed: false,
@@ -115,10 +115,12 @@ export default {
   computed: {},
   created() {
     this.conferences = []
+    let unsortedCities = []
+    let unsortedYears = []
     const conferences = async () => {
       const conferenceRef = firebase.firestore().collection('conferences')
       const allConferences = await conferenceRef.get()
-      for (const conference of allConferences.docs) {
+      for await (const conference of allConferences.docs) {
         this.conferences.push({
           id: conference.id,
           name: conference.data().name,
@@ -133,13 +135,23 @@ export default {
         // populate year filter
         let year = conference.data().startDate.substring(0, 4)
         if (!this.years.includes(year)) {
-          this.years.push(year)
+          unsortedYears.push(year)
         }
         // populate city filter
         if (!this.cities.includes(conference.data().city)) {
-          this.cities.push(conference.data().city)
+          unsortedCities.push(conference.data().city)
         }
       }
+      // sort the cities, then add an "All" option
+      this.cities = unsortedCities.sort()
+      this.cities.unshift('All')
+
+      // sort the years, then add an "All" option
+      this.years = unsortedYears.sort(function(a, b) {
+        return b - a
+      })
+      this.years.unshift('All')
+
       this.allConferences = this.conferences.slice()
       setTimeout(() => {
         this.loaded = true
@@ -172,9 +184,6 @@ export default {
       }
       this.conferences = sortedArray
       // this.conferences = []
-    },
-    ottawaOnly() {
-      this.conferences = this.conferences.filter(conf => conf.city == 'Ottawa')
     },
     getCities() {
       if (this.filters.city == 'All') {
