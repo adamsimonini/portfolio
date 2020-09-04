@@ -15,7 +15,7 @@
         offset-y
         min-width="290px"
       >
-        <template v-slot:activator="{ on }">
+        <template>
           <v-text-field
             class="picker"
             :value="formatDate(picker.start.date)"
@@ -33,7 +33,7 @@
         offset-y
         min-width="290px"
       >
-        <template v-slot:activator="{ on }">
+        <template>
           <v-text-field
             class="picker"
             :value="formatDate(picker.end.date)"
@@ -50,7 +50,14 @@
       </div>
       <!-- TODO: Add disabled when no link is provided  -->
       <div class="details-item conf-website">
-        <v-btn color="primary" small :href="`//${website}`" target="_blank" large :disabled="disabled">
+        <v-btn
+          color="primary"
+          small
+          :href="`//${website}`"
+          target="_blank"
+          large
+          :disabled="disabled"
+        >
           <v-icon>mdi-link-variant</v-icon>
           <span>{{ $t('website')}}</span>
         </v-btn>
@@ -112,7 +119,7 @@ export default {
       imageUrl: null,
       city: null,
       country: null,
-      website: null,
+      website: 'apple',
       deadline: null,
       reportName: 'Test',
       reportUrl: 'google.ca'
@@ -205,9 +212,13 @@ export default {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-  align-items: flex-start;
   justify-content: space-around;
   height: 800px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  padding: 15px;
+  border-radius: 50px;
+  align-items: center;
+  text-align: center;
 }
 .conf-card div {
   max-height: 40px;
@@ -225,7 +236,8 @@ export default {
   min-width: 250px;
   max-width: 300px;
   grid-area: image;
-  border-radius: 10px;
+  border-bottom: 5px solid black;
+  padding-bottom: 5px;
 }
 .conf-location {
   width: 100%;

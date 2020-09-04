@@ -22,6 +22,7 @@
             :city="conf.city"
             :country="conf.country"
             :deadline="conf.deadline"
+            :website="conf.website"
           />
         </div>
       </v-col>
