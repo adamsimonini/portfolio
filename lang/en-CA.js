@@ -8,6 +8,7 @@ export default {
   allConferencesTitle: "All Conferences",
   back: "Back",
   city: "City",
+  clearFilters: "Clear Filters",
   close: "Close",
   conferenceName: "Name of conference",
   conferenceRepo: "Conference Information Repository",
@@ -21,6 +22,7 @@ export default {
   email: "Email",
   end: "End",
   endDate: "End Date",
+  filters: "Filters",
   flipLayout: "Flip layout",
   fontSize: "Font size",
   fourzerofour: "404 error: page not found",
@@ -36,9 +38,12 @@ export default {
   register: "Register",
   registerHere: "Register Here",
   settings: "Settings",
+  showNewest: "Show Newest First",
+  showOldest: "Show Oldest First",
   small: "S",
   start: "Start",
   startDate: "Start Date",
   tags: "Tags",
   website: "Website",
+  year: "Year"
 }

@@ -34,13 +34,13 @@
           :mobile-break-point="1400"
           id="filter-drawer"
         >
-          <h3>Filters</h3>
+          <h3>{{ $t('filters')}}</h3>
           <span>
-            <b>Year</b>
+            <b>{{ $t('year')}}</b>
           </span>
           <v-select
             class="filter-item mb-5"
-            @change="getYear()"
+            @change="applyFilters()"
             v-model="filters.year"
             :items="years"
             menu-props="auto"
@@ -50,11 +50,11 @@
             solo
           ></v-select>
           <span>
-            <b>City</b>
+            <b>{{ $t('city')}}</b>
           </span>
           <v-select
             class="filter-item"
-            @change="getCities()"
+            @change="applyFilters()"
             v-model="filters.city"
             :items="cities"
             menu-props="auto"
@@ -64,10 +64,10 @@
             solo
           ></v-select>
           <v-btn class="filter-item mt-5" @click="filterDate()">
-            Show {{sortDateOrder == 'oldest' ? "newest" : "oldest"}} first
+            {{sortDateOrder == 'oldest' ? $t('showNewest') : $t('showOldest')}}
             <v-icon>mdi-clock</v-icon>
           </v-btn>
-          <v-btn class="filter-item mt-5" color="primary" @click="reset()">Clear Filters</v-btn>
+          <v-btn class="filter-item mt-5" color="primary" @click="reset()">{{ $t('clearFilters')}}</v-btn>
         </v-navigation-drawer>
       </v-col>
     </v-row>
@@ -90,12 +90,12 @@ export default {
   data: function() {
     return {
       conferences: [],
+      allConferences: [],
       imageUrl: [],
       loaded: false,
       sortDateOrder: 'newest',
       cities: [],
       years: [],
-      allConferences: [],
       filters: {
         city: 'All',
         year: 'All'
@@ -127,15 +127,21 @@ export default {
           city: conference.data().city,
           country: conference.data().country,
           website: conference.data().website,
+          year: parseInt(conference.data().startDate.substring(0, 4)),
           startDate: conference.data().startDate,
           endDate: conference.data().endDate,
           deadline: conference.data().deadline,
           imageRef: conference.data().imageRef
         })
         // populate year filter
-        let year = conference.data().startDate.substring(0, 4)
-        if (!this.years.includes(year)) {
-          unsortedYears.push(year)
+        if (
+          !this.years.includes(
+            parseInt(conference.data().startDate.substring(0, 4))
+          )
+        ) {
+          unsortedYears.push(
+            parseInt(conference.data().startDate.substring(0, 4))
+          )
         }
         // populate city filter
         if (!this.cities.includes(conference.data().city)) {
@@ -185,25 +191,25 @@ export default {
       this.conferences = sortedArray
       // this.conferences = []
     },
-    getCities() {
-      if (this.filters.city == 'All') {
-        this.conferences = this.allConferences
-      } else {
-        let filteredByCity = this.allConferences.filter(conf => {
-          return conf.city == this.filters.city
-        })
-        this.conferences = filteredByCity
-      }
-    },
-    getYear() {
-      if (this.filters.year == 'All') {
-        this.conferences = this.allConferences
-      } else {
-        let filteredByYear = this.allConferences.filter(conf => {
-          return conf.startDate.substring(0, 4) == this.filters.year
-        })
-        this.conferences = filteredByYear
-      }
+    applyFilters() {
+      let filters = this.filters
+      this.conferences = this.allConferences.filter(conf => {
+        let counter = 0
+        for (let key in filters) {
+          if (filters[key] == 'All') {
+            counter++
+          } else if (conf[key] == filters[key]) {
+            // if the value of a given filter key matches the value of the same key in the conference, add to the counter
+            counter++
+          }
+        }
+        // if the counter has the same length as the number of filters, then the given conference should be shown
+        if (counter == Object.keys(filters).length) {
+          return true
+        }
+        // no matter the result, reset counter for the next conference
+        counter = 0
+      })
     },
     reset() {
       this.filters.city = 'All'
