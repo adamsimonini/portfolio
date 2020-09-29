@@ -1,15 +1,13 @@
 <template>
   <v-container class>
+      <h2 class="text-center">{{ $t('allConferencesTitle')}}</h2>
     <v-row>
       <div class="loader-box" v-if="!loaded">
         <v-progress-circular :size="100" color="primary" indeterminate class="loader"></v-progress-circular>
       </div>
-      <v-col cols="10" md="10" v-if="loaded">
+      <v-col lg="10" md="12" sm="12" v-if="loaded">
         <!-- <LangToggle />
         <nuxt-link :to="localePath('inspire')">inspire</nuxt-link>-->
-
-        <h2 class="text-center">{{ $t('allConferencesTitle')}}</h2>
-
         <div class="all-conferneces">
           <ConfCard
             v-for="(conf) in conferences"
@@ -26,13 +24,12 @@
           />
         </div>
       </v-col>
-      <v-col cols="2">
+            <v-col lg="2" md="12" sm="12">
         <v-navigation-drawer
           v-model="filter.drawer"
           :mini-variant="filter.mini"
           :clipped="clipped"
           floating
-          :mobile-break-point="1400"
           id="filter-drawer"
         >
           <h3>{{ $t('filters')}}</h3>

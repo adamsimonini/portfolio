@@ -82,7 +82,7 @@ export default {
     submit() {
       this.$refs.observer.validate()
       const info = {
-        email: this.email,
+        email: this.email.trim(),
         password: this.password
       }
       firebase
